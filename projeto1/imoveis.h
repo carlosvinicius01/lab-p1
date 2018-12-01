@@ -103,7 +103,13 @@ void printApartamento(Apartamento *apartamento){
            apartamento->valorCondominio);
 }
 
-void printTerreno(){
+void printTerreno(Terreno *terreno){
+	printf("Titulo: %s\n"
+           "Disponivel para %s\n"
+           "Area: %lf\n",
+	    terreno->tituloAnuncio,
+	    terreno->disponivel,
+	    terreno->area);
 
 }
 
