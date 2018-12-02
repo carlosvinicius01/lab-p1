@@ -5,29 +5,45 @@
 
 int main(){
     Casa casa[8] = {};
-    Apartamento apartamento[3] = {};
+    Apartamento apartamento[8] = {};
+    Terreno terreno[8] = {};
 
-    strcpy(casa[0].tituloAnuncio, "CASA1");
-    casa[0].disponivel = 'a';
-    strcpy(casa[1].tituloAnuncio, "CASA2");
-    casa[1].disponivel = 'a';
-    strcpy(casa[2].tituloAnuncio, "CASA3");
-    casa[2].disponivel = 'v';
-    strcpy(casa[3].tituloAnuncio, "CASA4");
-    casa[3].disponivel = 'v';
-    strcpy(casa[4].tituloAnuncio, "CASA5");
-    casa[4].disponivel = 'a';
-    strcpy(casa[5].tituloAnuncio, "CASA6");
-    casa[5].disponivel = 'v';
-    strcpy(casa[6].tituloAnuncio, "CASA7");
-    casa[6].disponivel = 'a';
-    strcpy(casa[7].tituloAnuncio, "CASA8");
-    casa[7].disponivel = 'a';
+    for(int i = 0; i < 8; i++){
+        strcpy(casa[i].tituloAnuncio, "CASA");
+        casa[i].tituloAnuncio[4] = i+49;
+        casa[i].tituloAnuncio[5] = '\0';
+        casa[i].ativo = 1;
+        casa[i].valor = i*40;
+        strcpy(casa[i].endereco.bairro,"Mangabeira");
+        casa[i].disponivel = i%2==0 ? 'v':'a';
+    }
 
-//    printCasa(&casa[6]);
 
-   // lerImoveis(casa, 2, apartamento, 3, NULL, 0, "opressao.txt");
+    for(int i = 0; i < 8; i++){
+        strcpy(apartamento[i].tituloAnuncio, "AP");
+        apartamento[i].tituloAnuncio[2] = i+49;
+        apartamento[i].tituloAnuncio[3] = '\0';
+        apartamento[i].valor = i*40;
+        apartamento[i].ativo = 1;
+        apartamento[i].disponivel = i%2==0 ? 'v':'a';
+    }
 
-   exibirCasas(casa, 8, 'a');
+    for(int i = 0; i < 8; i++){
+        strcpy(terreno[i].tituloAnuncio, "TER");
+        terreno[i].tituloAnuncio[3] = i+49;
+        terreno[i].tituloAnuncio[4] = '\0';
+        terreno[i].valor = i*40;
+        terreno[i].ativo = 1;
+        terreno[i].disponivel = i%2==0 ? 'v':'a';
+    }
 
+   //salvarImoveis(casa, 8, apartamento, 3, terreno, 2, "opressao.txt");
+
+//   exibirCasas(casa, 8, '\0');
+    printImoveis(casa, 8, apartamento, 8, terreno, 8, TERRENO, 'v');
+//    imovelPorTitulo(casa, 8, apartamento, 8, terreno, 8, "0");
+//    imovelPorBairro(casa, 8, apartamento, 8, terreno, 8, "Mangabeira");
+//    imovelPorValor(casa, 8, apartamento, 8, terreno, 8, 270);
 }
+
+
