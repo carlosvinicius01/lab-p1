@@ -1,33 +1,73 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include "menuimobiliaria.h"
 #include "imoveis.h"
-#include <string.h>
-
 int main(){
-    Casa casa[8] = {};
-    Apartamento apartamento[3] = {};
+    Casa casa[50] = {};
+    Terreno terreno[50] = {};
+    Apartamento apartamento[50] = {};
+    int num = 0;
+    int sub,x;
 
-    strcpy(casa[0].tituloAnuncio, "CASA1");
-    casa[0].disponivel = 'a';
-    strcpy(casa[1].tituloAnuncio, "CASA2");
-    casa[1].disponivel = 'a';
-    strcpy(casa[2].tituloAnuncio, "CASA3");
-    casa[2].disponivel = 'v';
-    strcpy(casa[3].tituloAnuncio, "CASA4");
-    casa[3].disponivel = 'v';
-    strcpy(casa[4].tituloAnuncio, "CASA5");
-    casa[4].disponivel = 'a';
-    strcpy(casa[5].tituloAnuncio, "CASA6");
-    casa[5].disponivel = 'v';
-    strcpy(casa[6].tituloAnuncio, "CASA7");
-    casa[6].disponivel = 'a';
-    strcpy(casa[7].tituloAnuncio, "CASA8");
-    casa[7].disponivel = 'a';
 
-//    printCasa(&casa[6]);
+        for(int i = 0; i < 8; i++){
+        strcpy(casa[i].tituloAnuncio, "CASA");
+        casa[i].tituloAnuncio[4] = i+49;
+        casa[i].tituloAnuncio[5] = '\0';
+        casa[i].ativo = 1;
+        casa[i].valor = i*40;
+        strcpy(casa[i].endereco.bairro,"Mangabeira");
+        casa[i].disponivel = i%2==0 ? 'v':'a';
+    }
 
-   // lerImoveis(casa, 2, apartamento, 3, NULL, 0, "opressao.txt");
 
-   exibirCasas(casa, 8, 'a');
+    for(int i = 0; i < 8; i++){
+        strcpy(apartamento[i].tituloAnuncio, "AP");
+        apartamento[i].tituloAnuncio[2] = i+49;
+        apartamento[i].tituloAnuncio[3] = '\0';
+        apartamento[i].valor = i*40;
+        apartamento[i].ativo = 1;
+        apartamento[i].disponivel = i%2==0 ? 'v':'a';
+    }
 
+    for(int i = 0; i < 8; i++){
+        strcpy(terreno[i].tituloAnuncio, "TER");
+        terreno[i].tituloAnuncio[3] = i+49;
+        terreno[i].tituloAnuncio[4] = '\0';
+        terreno[i].valor = i*40;
+        terreno[i].ativo = 1;
+        terreno[i].disponivel = i%2==0 ? 'v':'a';
+    }
+
+    printf("----------------------IMOBILIARIA----------------------\n");
+    while(1){
+        num = displayMenu();
+        switch(num){
+            case 1:
+                subMenuCadastro();
+                break;
+            case 2:
+                printImoveis(casa, 50, apartamento, 50, terreno, 50, TERRENO, 'v');
+                printImoveis(casa, 50, apartamento, 50, terreno, 50, TERRENO, 'a');
+                printf("1 para voltar ao menu");
+                scanf("%d",&x);
+                system("clear");
+                break;
+            case 3:
+                subMenuBusca();
+                break;
+            case 4:
+                //editar;
+                break;
+            case 5:
+                //remover;
+                break;
+            case 6:
+                return 0;
+                break;
+
+
+        }
+    }
+    return 0;
 }
