@@ -13,7 +13,7 @@ typedef struct endereco{
 
     char rua[31];
     char bairro[31];
-    char cep[11];
+    char cep[9];
     char cidade[31];
     int numero;
 
@@ -84,8 +84,8 @@ void printCasa(Casa *casa){
            "Disponivel para %c\n"
            "%d pavimentos\n"
            "%d quartos\n"
-           "Area do terreno: %lf\n"
-           "Area construida: %lf\n\n",
+           "Area do terreno: %f\n"
+           "Area construida: %f\n\n",
            casa->tituloAnuncio,
            casa->disponivel,
            casa->nPavimentos,
@@ -267,5 +267,35 @@ void imovelPorValor(Casa casa[],
         }
     }
 }
+
+int procurarVazio(Casa casa[],
+                  int nCasas,
+                  Apartamento apartamento[],
+                  int nApartamentos,
+                  Terreno terreno[],
+                  int nTerrenos,
+				  int tipo)
+{
+	if(tipo==1)
+		for(int i = 0; i < nCasas; i++){
+			if(casa[i].ativo == '\0')
+				return i;
+		}
+
+	if(tipo==2)
+		for(int i = 0; i < nApartamentos; i++){
+			if(apartamento[i].ativo == '\0')
+				return i;
+		}
+
+	if(tipo==3)
+		for(int i = 0; i < nTerrenos; i++){
+			if(terreno[i].ativo == '\0')
+				return i;
+		}
+}
+
+
+
 
 #endif // IMOVEIS_H_INCLUDED

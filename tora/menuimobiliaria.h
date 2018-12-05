@@ -10,7 +10,7 @@ int displayMenu(){
     int num;
     printf("1.CADASTRAR IMOVEIS\n2.LISTAR IMOVEIS\n3.BUSCAR IMOVEIS\n4.EDITAR IMOVEIS\n5.REMOVER IMOVEIS\n6.SAIR\n");
 
-    scanf("%d",&num);
+    scanf("%d%*c",&num);
 
     system("cls");
     return num;
@@ -81,6 +81,17 @@ void subMenuBusca(Casa casa[],
 
 }
 
+
+void cadastrarEndereco(Endereco endereco){
+	fgets(endereco.rua, 31, stdin);
+	fgets(endereco.bairro, 31, stdin);
+	fgets(endereco.rua, 31, stdin);
+	fgets(endereco.cep, 31, stdin);
+	fgets(endereco.cidade, 31, stdin);
+	fgets(endereco.cep, 9, stdin);
+	scanf("%d", &endereco.numero);
+}
+
 void subMenuCadastro(Casa casa[],
                   int nCasas,
                   Apartamento apartamento[],
@@ -89,26 +100,47 @@ void subMenuCadastro(Casa casa[],
                   int nTerrenos){
 
     int num = 0;
-
+    int primeiroVazio;
     printf("1.CADASTRAR CASA\n2.CADASTRAR APARTAMENTO\n3.CADASTRAR TERRENO\n4.VOLTAR\n");
-    scanf("%d",&num);
+    scanf("%d%*c",&num);
+
     switch(num){
     case 1:
+        primeiroVazio = procurarVazio(casa, 50, NULL, 50, NULL, 50, 1);
         printf("Digite o titulo: ");
-        //fgets();
+        fgets(casa[primeiroVazio].tituloAnuncio, 51, stdin);
         printf("Digite a disponibilidade(v - vender/a - alugar): ");
-        //scanf("%c",&disponivel);
+        scanf("%c%*c", &casa[primeiroVazio].disponivel);
         printf("Digite o numero de pavimentos e de quartos: ");
-        //scanf("%d %d",&);
+        scanf("%d %d",&casa[primeiroVazio].nPavimentos, &casa[primeiroVazio].nQuartos);
         printf("Digite a area do terreno e a da construcao: ");
-        //scanf("%lf %lf",&);
+        scanf("%lf %lf",&casa[primeiroVazio].areaTerreno, &casa[primeiroVazio].areaConstruida);
         printf("Digite o Valor: ");
-        //scanf("%lf");
+        scanf("%lf", &casa[primeiroVazio].valor);
         printf("Digite o endereço(Cidade/Bairro/Rua/Numero/CEP): ");
+        cadastrarEndereco(casa[primeiroVazio].endereco);
+        casa[primeiroVazio].ativo = 1;
         system("pause");
+
     break;
     case 2:
-
+        primeiroVazio = procurarVazio(NULL, 50, apartamento, 50, NULL, 50, 2);
+        printf("Digite o titulo: ");
+        fgets(apartamento[primeiroVazio].tituloAnuncio, 51, stdin);
+        printf("Digite a disponibilidade(v - vender/a - alugar): ");
+        scanf("%c%*c", &apartamento[primeiroVazio].disponivel);
+        printf("Digite a posicao(n - norte/s - sul): ");
+        scanf("%c%*c", &apartamento[primeiroVazio].posicao);
+        printf("Digite o numero de quartos, vagas e andar: ");
+        scanf("%d %d", &apartamento[primeiroVazio].nQuartos, &apartamento[primeiroVazio].nVagas, &apartamento[primeiroVazio].andar);
+        printf("Digite o valor do condominio, a area\n");
+        scanf("%lf %lf",&apartamento[primeiroVazio].valorCondominio, &apartamento[primeiroVazio].area);
+        printf("Digite o Valor: ");
+        scanf("%lf", &apartamento[primeiroVazio].valor);
+        printf("Digite o endereço(Cidade/Bairro/Rua/Numero/CEP): ");
+        cadastrarEndereco(apartamento[primeiroVazio].endereco);
+        apartamento[primeiroVazio].ativo = 1;
+        system("pause");
     break;
 
     case 3:
