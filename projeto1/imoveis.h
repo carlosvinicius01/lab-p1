@@ -77,7 +77,7 @@ void lerImoveis(Casa casa[],
     fclose(fp);
 }
 
-// sub-funcoes que exibem as informaÃ§oes de uma unica casa, apartamento, ou terreno
+// sub-funcoes que exibem as informaçoes de uma unica casa, apartamento, ou terreno
 
 void printCasa(Casa *casa){
     printf("Titulo: %s\n"
@@ -154,7 +154,7 @@ void exibirTerrenos(Terreno terreno[], int nTerrenos, char disp)
     }
 }
 
-//RemoÃ§Ã£o de imoveis
+//Remoção de imoveis
 
 void removerCasa(Casa casa[], int n){
     casa[n].ativo = '\0';

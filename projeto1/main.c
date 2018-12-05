@@ -1,16 +1,14 @@
-#include <stdio.h>
 #include <stdlib.h>
-#include "menuimobiliaria.h"
+#include <stdio.h>
 #include "imoveis.h"
+#include <string.h>
+
 int main(){
-    Casa casa[50] = {};
-    Terreno terreno[50] = {};
-    Apartamento apartamento[50] = {};
-    int num = 0;
-    int sub,x;
+    Casa casa[8] = {};
+    Apartamento apartamento[8] = {};
+    Terreno terreno[8] = {};
 
-
-        for(int i = 0; i < 8; i++){
+    for(int i = 0; i < 8; i++){
         strcpy(casa[i].tituloAnuncio, "CASA");
         casa[i].tituloAnuncio[4] = i+49;
         casa[i].tituloAnuncio[5] = '\0';
@@ -39,35 +37,12 @@ int main(){
         terreno[i].disponivel = i%2==0 ? 'v':'a';
     }
 
-    printf("----------------------IMOBILIARIA----------------------\n");
-    while(1){
-        num = displayMenu();
-        switch(num){
-            case 1:
-                subMenuCadastro();
-                break;
-            case 2:
-                printImoveis(casa, 50, apartamento, 50, terreno, 50, TERRENO, 'v');
-                printImoveis(casa, 50, apartamento, 50, terreno, 50, TERRENO, 'a');
-                printf("1 para voltar ao menu");
-                scanf("%d",&x);
-                system("clear");
-                break;
-            case 3:
-                subMenuBusca();
-                break;
-            case 4:
-                //editar;
-                break;
-            case 5:
-                //remover;
-                break;
-            case 6:
-                return 0;
-                break;
+   //salvarImoveis(casa, 8, apartamento, 3, terreno, 2, "opressao.txt");
 
-
-        }
-    }
-    return 0;
+//   exibirCasas(casa, 8, '\0');
+    printImoveis(casa, 8, apartamento, 8, terreno, 8, TERRENO, 'v');
+//    imovelPorTitulo(casa, 8, apartamento, 8, terreno, 8, "0");
+//    imovelPorBairro(casa, 8, apartamento, 8, terreno, 8, "Mangabeira");
+//    imovelPorValor(casa, 8, apartamento, 8, terreno, 8, 270);
 }
+
