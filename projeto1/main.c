@@ -46,4 +46,3 @@ int main(){
 //    imovelPorValor(casa, 8, apartamento, 8, terreno, 8, 270);
 }
 
-
