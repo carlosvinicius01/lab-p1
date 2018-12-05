@@ -7,7 +7,6 @@ int main(){
     Terreno terreno[50] = {};
     Apartamento apartamento[50] = {};
     int num = 0;
-    int sub,x;
     int i;
 
         for(i = 0; i < 8; i++){
@@ -44,7 +43,7 @@ int main(){
         num = displayMenu();
         switch(num){
             case 1:
-                subMenuCadastro();
+                subMenuCadastro(casa, 50,apartamento,50,terreno,50);
                 break;
             case 2:
                 printImoveis(casa, 50,apartamento,50,terreno,50,TODOS,'\0');
@@ -61,6 +60,7 @@ int main(){
                 //remover;
                 break;
             case 6:
+                printf("PRESSIONE UMA TECLA PARA SAIR\n");
                 return 0;
                 break;
 
