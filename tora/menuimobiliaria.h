@@ -120,7 +120,6 @@ void subMenuCadastro(Casa casa[],
         printf("Digite o endereço(Cidade/Bairro/Rua/Numero/CEP): ");
         cadastrarEndereco(casa[primeiroVazio].endereco);
         casa[primeiroVazio].ativo = 1;
-        system("pause");
 
     break;
     case 2:
@@ -132,7 +131,7 @@ void subMenuCadastro(Casa casa[],
         printf("Digite a posicao(n - norte/s - sul): ");
         scanf("%c%*c", &apartamento[primeiroVazio].posicao);
         printf("Digite o numero de quartos, vagas e andar: ");
-        scanf("%d %d", &apartamento[primeiroVazio].nQuartos, &apartamento[primeiroVazio].nVagas, &apartamento[primeiroVazio].andar);
+        scanf("%d %d %d", &apartamento[primeiroVazio].nQuartos, &apartamento[primeiroVazio].nVagas, &apartamento[primeiroVazio].andar);
         printf("Digite o valor do condominio, a area\n");
         scanf("%lf %lf",&apartamento[primeiroVazio].valorCondominio, &apartamento[primeiroVazio].area);
         printf("Digite o Valor: ");
@@ -144,6 +143,19 @@ void subMenuCadastro(Casa casa[],
     break;
 
     case 3:
+        primeiroVazio = procurarVazio(NULL, 50, NULL, 50, terreno, 50, 3);
+        printf("Digite o titulo: ");
+        fgets(terreno[primeiroVazio].tituloAnuncio, 51, stdin);
+        printf("Digite a disponibilidade(v - vender/a - alugar): ");
+        scanf("%c%*c", &terreno[primeiroVazio].disponivel);
+        printf("Digite a Area: ");
+        scanf("%lf",&terreno[primeiroVazio].area);
+        printf("Digite o Valor: ");
+        scanf("%lf", &terreno[primeiroVazio].valor);
+        printf("Digite o endereço(Cidade/Bairro/Rua/Numero/CEP): ");
+        cadastrarEndereco(terreno[primeiroVazio].endereco);
+        terreno[primeiroVazio].ativo = 1;
+        system("pause");
 
     break;
 
@@ -158,6 +170,237 @@ void subMenuCadastro(Casa casa[],
 
 }
 
+void subMenuEditar(Casa casa[],
+                  int nCasas,
+                  Apartamento apartamento[],
+                  int nApartamentos,
+                  Terreno terreno[],
+                  int nTerrenos)
+                  {
+                     int num, edit, i, num2;
+                     char titulo[51];
 
+                     printf("1.EDITAR CASA\n2.EDITAR APARTAMENTO\n3.EDITAR TERRENO\n4.VOLTAR\n");
+                     scanf("%d%*c",&num);
+                     switch(num){
+                    case 1:
+                        printf("digite o titulo do imovel que deseja editar: ");
+                        fgets(titulo,51,stdin);
+                        //titulo[strlen(titulo)-1] = '\0';    DA ERRADO SE BOTAR ESSA MERDA PQ NAO BOTAMOS NA CRIACAO;
+                        for(i = 0; i < nCasas; i++){
+                            if(strcmp(casa[i].tituloAnuncio, titulo)==0 && casa[i].ativo != '\0'){
+                                edit = 1; // recebe 1 se o titulo for encontrado
+                                break;
+                                }
+                            }
+                            if(edit == 1){
+                                printf("1.EDITAR TITULO\n2.MUDAR DISPONIBILIDADE\n3.EDITAR QUARTOS E PAVs\n4.EDITAR AREAS\n5.EDITAR VALOR\n6.EDITAR ENDEREÇO\n7.SAIR");
+                                scanf("%d%*c",&num2);
+                                switch(num2){
+                                    case 1:
+                                        printf("Digite o novo titulo: ");
+                                        fgets(casa[i].tituloAnuncio, 51, stdin);
+                                    break;
+                                    case 2:
+                                        printf("Digite a disponibilidade: ");
+                                        scanf("%c%*c", &casa[i].disponivel);
+                                        break;
+                                    case 3:
+                                        printf("digite o numero de quartos e pavimentos: ");
+                                        scanf("%d %d",&casa[i].nQuartos, &casa[i].nPavimentos);
+                                        break;
+                                    case 4:
+                                        printf("digite a area do terreno e a construida: ");
+                                        scanf("%lf %lf",&casa[i].areaTerreno, &casa[i].areaConstruida);
+                                        break;
+                                    case 5:
+                                        printf("digite o novo valor: ");
+                                        scanf("%lf", &casa[i].valor);
+                                        break;
+                                    case 6:
+                                        printf("digite o endereço(cidade,bairro,rua,numero,cep): ");
+                                        cadastrarEndereco(casa[i].endereco);
+                                        break;
+                                }
+                                break;
+                            }
+                            else{
+                                printf("Imovel nao encontrado, aperte enter para voltar ao menu\n");
+                            }
+                        break;
+
+                    case 2:
+                        printf("digite o titulo do imovel que deseja editar: ");
+                        fgets(titulo,51,stdin);
+                        //titulo[strlen(titulo)-1] = '\0';    DA ERRADO SE BOTAR ESSA MERDA PQ NAO BOTAMOS NA CRIACAO;
+                        for(i = 0; i < nApartamentos; i++){
+                            if(strcmp(apartamento[i].tituloAnuncio, titulo)==0 && apartamento[i].ativo != '\0'){
+                                edit = 1; // recebe 1 se o titulo for encontrado
+                                break;
+                                }
+                            }
+                            if(edit == 1){
+                                printf("1.EDITAR TITULO\n2.MUDAR DISPONIBILIDADE\n3.EDITAR QUARTOS/VAGAS/ANDAR\n4.EDITAR POSICAO/AREA\n5.EDITAR VALORES\n6.EDITAR ENDEREÇO\n7.SAIR");
+                                scanf("%d%*c",&num2);
+                                switch(num2){
+                                    case 1:
+                                        printf("Digite o novo titulo: ");
+                                         fgets(apartamento[i].tituloAnuncio, 51, stdin);
+                                    break;
+                                    case 2:
+                                        printf("Digite a disponibilidade: ");
+                                        scanf("%c%*c", &apartamento[i].disponivel);
+                                        break;
+                                    case 3:
+                                       printf("Digite o numero de quartos, vagas e andar: ");
+                                       scanf("%d %d %d", &apartamento[i].nQuartos, &apartamento[i].nVagas, &apartamento[i].andar);
+                                        break;
+                                    case 4:
+                                        printf("Digite a posicao(n - norte/s - sul) e a area do apto: ");
+                                        scanf("%c%*c %lf", &apartamento[i].posicao, &apartamento[i].area);
+                                        break;
+                                    case 5:
+                                        printf("digite o novo valor do imovel e do condominio: ");
+                                        scanf("%lf %lf", &apartamento[i].valor, &apartamento[i].valorCondominio);
+                                        break;
+                                    case 6:
+                                        printf("digite o endereço(cidade,bairro,rua,numero,cep): ");
+                                        cadastrarEndereco(apartamento[i].endereco);
+                                        break;
+                                    case 7:
+                                        break;
+                                }
+                                break;
+                            }
+                            else{
+                                printf("Imovel nao encontrado, aperte enter para voltar ao menu\n");
+                            }
+                        break;
+                    case 3:
+                        printf("digite o titulo do imovel que deseja editar: ");
+                        fgets(titulo,51,stdin);
+                        //titulo[strlen(titulo)-1] = '\0';    DA ERRADO SE BOTAR ESSA MERDA PQ NAO BOTAMOS NA CRIACAO;
+                        for(i = 0; i < nTerrenos; i++){
+                            if(strcmp(terreno[i].tituloAnuncio, titulo)==0 && terreno[i].ativo != '\0'){
+                                edit = 1; // recebe 1 se o titulo for encontrado
+                                break;
+                                }
+                            }
+                        if(edit == 1){
+                                printf("1.EDITAR TITULO\n2.MUDAR DISPONIBILIDADE\n3.EDITAR AREA\n4.EDITAR VALOR\n5.EDITAR ENDERECO\n6.SAIR");
+                                scanf("%d%*c",&num2);
+                                switch(num2){
+                                    case 1:
+                                        printf("Digite o novo titulo: ");
+                                        fgets(terreno[i].tituloAnuncio, 51, stdin);
+                                    break;
+                                    case 2:
+                                        printf("Digite a disponibilidade: ");
+                                        scanf("%c%*c", &terreno[i].disponivel);
+                                        break;
+                                    case 3:
+                                       printf("Digite a Area: ");
+                                       scanf("%lf",&terreno[i].area);
+                                        break;
+                                    case 4:
+                                       printf("Digite o Valor: ");
+                                       scanf("%lf", &terreno[i].valor);
+                                        break;
+                                    case 5:
+                                        printf("digite o endereço(cidade,bairro,rua,numero,cep): ");
+                                        cadastrarEndereco(terreno[i].endereco);
+                                        break;
+                                    case 6:
+                                        break;
+                                }
+                                break;
+                            }
+                            else{
+                                printf("Imovel nao encontrado, aperte enter para voltar ao menu\n");
+                            }
+                        break;
+
+                    case 4:
+                        break;
+                     }
+                  }
+void subMenuExcluir(Casa casa[],
+                  int nCasas,
+                  Apartamento apartamento[],
+                  int nApartamentos,
+                  Terreno terreno[],
+                  int nTerrenos)
+    {
+                     int num, edit, i, num2;
+                     char titulo[51];
+
+                     printf("1.REMOVER CASA\n2.REMOVER APARTAMENTO\n3.REMOVER TERRENO\n4.VOLTAR\n");
+                     scanf("%d%*c",&num);
+
+                     switch(num){
+                    case 1:
+                         printf("digite o titulo do imovel que deseja editar: ");
+                         fgets(titulo,51,stdin);
+                        //titulo[strlen(titulo)-1] = '\0';    DA ERRADO SE BOTAR ESSA MERDA PQ NAO BOTAMOS NA CRIACAO;
+                         for(i = 0; i < nCasas; i++){
+                            if(strcmp(casa[i].tituloAnuncio, titulo)==0 && casa[i].ativo != '\0'){
+                                edit = 1; // recebe 1 se o titulo for encontrado
+                                break;
+                                }
+                            }
+                          if(edit == 1)
+                            casa[i].ativo = '\0';
+                          else
+                            printf("Imovel nao encontrado\n");
+                        break;
+
+                    case 2:
+                         printf("digite o titulo do imovel que deseja editar: ");
+                         fgets(titulo,51,stdin);
+                        //titulo[strlen(titulo)-1] = '\0';    DA ERRADO SE BOTAR ESSA MERDA PQ NAO BOTAMOS NA CRIACAO;
+                         for(i = 0; i < nApartamentos; i++){
+                            if(strcmp(apartamento[i].tituloAnuncio, titulo)==0 && apartamento[i].ativo != '\0'){
+                                edit = 1; // recebe 1 se o titulo for encontrado
+                                break;
+                                }
+                            }
+                          if(edit == 1)
+                            apartamento[i].ativo = '\0';
+                          else
+                            printf("Imovel nao encontrado\n");
+                        break;
+
+                    case 3:
+                         printf("digite o titulo do imovel que deseja editar: ");
+                         fgets(titulo,51,stdin);
+                        //titulo[strlen(titulo)-1] = '\0';    DA ERRADO SE BOTAR ESSA MERDA PQ NAO BOTAMOS NA CRIACAO;
+                         for(i = 0; i < nTerrenos; i++){
+                            if(strcmp(terreno[i].tituloAnuncio, titulo)==0 && terreno[i].ativo != '\0'){
+                                edit = 1; // recebe 1 se o titulo for encontrado
+                                break;
+                                }
+                            }
+                          if(edit == 1)
+                            terreno[i].ativo = '\0';
+                          else
+                            printf("Imovel nao encontrado\n");
+                        break;
+
+                    case 4:
+                        break;
+                     }
+
+
+
+
+
+
+
+
+
+
+
+
+}
 
 #endif // MENUIMOBILIARIA_H_INCLUDED
