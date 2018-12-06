@@ -8,36 +8,8 @@ int main(){
     Terreno terreno[50] = {};
     Apartamento apartamento[50] = {};
     int num = 0;
-    int i;
 
-        for(i = 0; i < 8; i++){
-        strcpy(casa[i].tituloAnuncio, "CASA");
-        casa[i].tituloAnuncio[4] = i+49;
-        casa[i].tituloAnuncio[5] = '\0';
-        casa[i].ativo = 1;
-        casa[i].valor = i*40;
-        strcpy(casa[i].endereco.bairro,"Mangabeira");
-        casa[i].disponivel = i%2==0 ? 'v':'a';
-    }
-
-
-    for(i = 0; i < 8; i++){
-        strcpy(apartamento[i].tituloAnuncio, "AP");
-        apartamento[i].tituloAnuncio[2] = i+49;
-        apartamento[i].tituloAnuncio[3] = '\0';
-        apartamento[i].valor = i*40;
-        apartamento[i].ativo = 1;
-        apartamento[i].disponivel = i%2==0 ? 'v':'a';
-    }
-
-    for(i = 0; i < 8; i++){
-        strcpy(terreno[i].tituloAnuncio, "TER");
-        terreno[i].tituloAnuncio[3] = i+49;
-        terreno[i].tituloAnuncio[4] = '\0';
-        terreno[i].valor = i*40;
-        terreno[i].ativo = 1;
-        terreno[i].disponivel = i%2==0 ? 'v':'a';
-    }
+    lerImoveis(casa,50,apartamento,50,terreno,50,"teste.txt");
 
     printf("----------------------IMOBILIARIA----------------------\n");
     while(1){
@@ -55,13 +27,14 @@ int main(){
                 subMenuBusca(casa, 50,apartamento,50,terreno,50);
                 break;
             case 4:
-                //editar;
+                subMenuEditar(casa, 50,apartamento,50,terreno,50);
                 break;
             case 5:
-                //remover;
+                subMenuExcluir(casa,50,apartamento,50,terreno,50);
                 break;
             case 6:
                 printf("PRESSIONE UMA TECLA PARA SAIR\n");
+                salvarImoveis(casa,50,apartamento,50,terreno,50,"teste.txt");
                 return 0;
                 break;
 
