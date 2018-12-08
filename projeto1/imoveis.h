@@ -13,7 +13,7 @@ typedef struct endereco{
 
     char rua[31];
     char bairro[31];
-    char cep[11];
+    char cep[9];
     char cidade[31];
     int numero;
 
@@ -77,27 +77,33 @@ void lerImoveis(Casa casa[],
     fclose(fp);
 }
 
-// sub-funcoes que exibem as informaçoes de uma unica casa, apartamento, ou terreno
+// sub-funcoes que exibem as informaÃ§oes de uma unica casa, apartamento, ou terreno
 
 void printCasa(Casa *casa){
     printf("Titulo: %s\n"
-           "Disponivel para %c\n"
+           "Disponivel para %s\n"
            "%d pavimentos\n"
            "%d quartos\n"
-           "Area do terreno: %lf\n"
-           "Area construida: %lf\n\n",
+           "Area do terreno: %.2f\n"
+           "Area construida: %.2f\n"
+           "Endereco: Cidade: %s, Bairro: %s, %s, %d, %s\n\n",
            casa->tituloAnuncio,
-           casa->disponivel,
+           casa->disponivel=='v' ? "venda":"alugar",
            casa->nPavimentos,
            casa->nQuartos,
            casa->areaTerreno,
-           casa->areaConstruida);
+           casa->areaConstruida,
+           casa->endereco.cidade,
+           casa->endereco.bairro,
+           casa->endereco.rua,
+           casa->endereco.numero,
+           casa->endereco.cep);
 
 }
 
 void printApartamento(Apartamento *apartamento){
     printf("Titulo: %s\n"
-           "Disponivel para %c\n"
+           "Disponivel para %s\n"
            "Area: %lf\n"
            "%d quartos\n"
            "Posicao: %c\n"
@@ -105,7 +111,7 @@ void printApartamento(Apartamento *apartamento){
            "%d vagas de garagem\n"
            "Valor do condominio: %lf\n\n",
            apartamento->tituloAnuncio,
-           apartamento->disponivel,
+           apartamento->disponivel=='v' ? "venda":"alugar",
            apartamento->area,
            apartamento->nQuartos,
            apartamento->posicao,
@@ -116,10 +122,10 @@ void printApartamento(Apartamento *apartamento){
 
 void printTerreno(Terreno *terreno){
 	printf("Titulo: %s\n"
-           "Disponivel para %c\n"
+           "Disponivel para %s\n"
            "Area: %lf\n\n",
 	    terreno->tituloAnuncio,
-	    terreno->disponivel,
+	    terreno->disponivel=='v' ? "venda":"alugar",
 	    terreno->area);
 
 }
@@ -129,7 +135,8 @@ de acordo com a sua disponibilidade (vender ou alugar) */
 
 void exibirCasas(Casa casa[], int nCasas, char disp)
 {
-    for(int i = 0; i < nCasas; i++){
+    int i;
+    for(i = 0; i < nCasas; i++){
         if(casa[i].ativo != '\0' && (disp == '\0' || disp == casa[i].disponivel)){
             printCasa(&casa[i]);
         }
@@ -138,7 +145,8 @@ void exibirCasas(Casa casa[], int nCasas, char disp)
 
 void exibirApartamentos(Apartamento apartamento[], int nApartamentos, char disp)
 {
-    for(int i = 0; i < nApartamentos; i++){
+    int i;
+    for(i = 0; i < nApartamentos; i++){
         if(apartamento[i].ativo != '\0' && (disp == '\0' || disp == apartamento[i].disponivel)){
             printApartamento(&apartamento[i]);
         }
@@ -147,14 +155,15 @@ void exibirApartamentos(Apartamento apartamento[], int nApartamentos, char disp)
 
 void exibirTerrenos(Terreno terreno[], int nTerrenos, char disp)
 {
-    for(int i = 0; i < nTerrenos; i++){
+    int i;
+    for(i = 0; i < nTerrenos; i++){
         if(terreno[i].ativo != '\0' && (disp == '\0' || disp == terreno[i].disponivel)){
             printTerreno(&terreno[i]);
         }
     }
 }
 
-//Remoção de imoveis
+//RemoÃ§Ã£o de imoveis
 
 void removerCasa(Casa casa[], int n){
     casa[n].ativo = '\0';
@@ -195,17 +204,18 @@ void imovelPorTitulo(Casa casa[],
                   int nTerrenos,
                   char *titulo)
 {
-    for(int i = 0; i < nCasas; i++){
+    int i;
+    for(i = 0; i < nCasas; i++){
         if(strcmp(casa[i].tituloAnuncio, titulo)==0 && casa[i].ativo != '\0'){
             printCasa(&casa[i]);
         }
     }
-    for(int i = 0; i < nApartamentos; i++){
+    for(i = 0; i < nApartamentos; i++){
         if(strcmp(apartamento[i].tituloAnuncio, titulo)==0 && apartamento[i].ativo != '\0'){
             printApartamento(&apartamento[i]);
         }
     }
-    for(int i = 0; i < nTerrenos; i++){
+    for(i = 0; i < nTerrenos; i++){
         if(strcmp(terreno[i].tituloAnuncio, titulo)==0 && terreno[i].ativo != '\0'){
             printTerreno(&terreno[i]);
         }
@@ -220,17 +230,18 @@ void imovelPorBairro(Casa casa[],
                   int nTerrenos,
                   char *bairro)
 {
-    for(int i = 0; i < nCasas; i++){
+    int i;
+    for(i = 0; i < nCasas; i++){
         if(strcmp(casa[i].endereco.bairro, bairro)==0 && casa[i].ativo != '\0'){
             printCasa(&casa[i]);
         }
     }
-    for(int i = 0; i < nApartamentos; i++){
+    for(i = 0; i < nApartamentos; i++){
         if(strcmp(apartamento[i].endereco.bairro, bairro)==0 && apartamento[i].ativo != '\0'){
             printApartamento(&apartamento[i]);
         }
     }
-    for(int i = 0; i < nTerrenos; i++){
+    for(i = 0; i < nTerrenos; i++){
         if(strcmp(terreno[i].endereco.bairro, bairro)==0 && terreno[i].ativo != '\0'){
             printTerreno(&terreno[i]);
         }
@@ -245,21 +256,52 @@ void imovelPorValor(Casa casa[],
                   int nTerrenos,
                   double valor)
 {
-    for(int i = 0; i < nCasas; i++){
+    int i;
+    for(i = 0; i < nCasas; i++){
         if(valor <= casa[i].valor && casa[i].ativo != '\0'){
             printCasa(&casa[i]);
         }
     }
-    for(int i = 0; i < nApartamentos; i++){
+    for(i = 0; i < nApartamentos; i++){
         if(valor <= apartamento[i].valor && apartamento[i].ativo != '\0'){
             printApartamento(&apartamento[i]);
         }
     }
-    for(int i = 0; i < nTerrenos; i++){
+    for(i = 0; i < nTerrenos; i++){
         if(valor <= terreno[i].valor && terreno[i].ativo != '\0'){
             printTerreno(&terreno[i]);
         }
     }
 }
+
+int procurarVazio(Casa casa[],
+                  int nCasas,
+                  Apartamento apartamento[],
+                  int nApartamentos,
+                  Terreno terreno[],
+                  int nTerrenos,
+				  int tipo)
+{
+	if(tipo==1)
+		for(int i = 0; i < nCasas; i++){
+			if(casa[i].ativo == '\0')
+				return i;
+		}
+
+	if(tipo==2)
+		for(int i = 0; i < nApartamentos; i++){
+			if(apartamento[i].ativo == '\0')
+				return i;
+		}
+
+	if(tipo==3)
+		for(int i = 0; i < nTerrenos; i++){
+			if(terreno[i].ativo == '\0')
+				return i;
+		}
+}
+
+
+
 
 #endif // IMOVEIS_H_INCLUDED
