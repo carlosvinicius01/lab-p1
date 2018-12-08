@@ -1,0 +1,1 @@
+/usr/bin/c++    -rdynamic CMakeFiles/pj2.dir/main.cpp.o CMakeFiles/pj2.dir/imoveis.cpp.o  -o pj2 

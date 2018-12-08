@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/carlos/Documentos/Coding/cppTests/lp1/lab-p1/projeto2/imoveis.cpp
+imoveis.hpp
+/home/carlos/Documentos/Coding/cppTests/lp1/lab-p1/projeto2/imoveis.hpp
+string
+-
+
+/home/carlos/Documentos/Coding/cppTests/lp1/lab-p1/projeto2/imoveis.hpp
+string
+-
+
+/home/carlos/Documentos/Coding/cppTests/lp1/lab-p1/projeto2/main.cpp
+iostream
+-
+string
+-
+list
+-
+imoveis.hpp
+/home/carlos/Documentos/Coding/cppTests/lp1/lab-p1/projeto2/imoveis.hpp
+
