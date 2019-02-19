@@ -1,1 +1,1 @@
-/usr/bin/c++    -rdynamic CMakeFiles/pj2.dir/main.cpp.o CMakeFiles/pj2.dir/imoveis.cpp.o  -o pj2 
+/usr/bin/c++  -std=c++14 -g  -rdynamic CMakeFiles/pj2.dir/main.cpp.o CMakeFiles/pj2.dir/imoveis.cpp.o CMakeFiles/pj2.dir/SistemaImobiliaria.cpp.o  -o pj2 

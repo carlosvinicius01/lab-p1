@@ -9,4 +9,6 @@ add_executable(
 	main.cpp
 	imoveis.cpp
 	imoveis.hpp
+	SistemaImobiliaria.hpp
+	SistemaImobiliaria.cpp
 )

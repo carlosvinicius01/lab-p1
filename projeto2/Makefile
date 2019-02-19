@@ -123,6 +123,33 @@ pj2/fast:
 	$(MAKE) -f CMakeFiles/pj2.dir/build.make CMakeFiles/pj2.dir/build
 .PHONY : pj2/fast
 
+SistemaImobiliaria.o: SistemaImobiliaria.cpp.o
+
+.PHONY : SistemaImobiliaria.o
+
+# target to build an object file
+SistemaImobiliaria.cpp.o:
+	$(MAKE) -f CMakeFiles/pj2.dir/build.make CMakeFiles/pj2.dir/SistemaImobiliaria.cpp.o
+.PHONY : SistemaImobiliaria.cpp.o
+
+SistemaImobiliaria.i: SistemaImobiliaria.cpp.i
+
+.PHONY : SistemaImobiliaria.i
+
+# target to preprocess a source file
+SistemaImobiliaria.cpp.i:
+	$(MAKE) -f CMakeFiles/pj2.dir/build.make CMakeFiles/pj2.dir/SistemaImobiliaria.cpp.i
+.PHONY : SistemaImobiliaria.cpp.i
+
+SistemaImobiliaria.s: SistemaImobiliaria.cpp.s
+
+.PHONY : SistemaImobiliaria.s
+
+# target to generate assembly for a file
+SistemaImobiliaria.cpp.s:
+	$(MAKE) -f CMakeFiles/pj2.dir/build.make CMakeFiles/pj2.dir/SistemaImobiliaria.cpp.s
+.PHONY : SistemaImobiliaria.cpp.s
+
 imoveis.o: imoveis.cpp.o
 
 .PHONY : imoveis.o
@@ -186,6 +213,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... pj2"
 	@echo "... edit_cache"
+	@echo "... SistemaImobiliaria.o"
+	@echo "... SistemaImobiliaria.i"
+	@echo "... SistemaImobiliaria.s"
 	@echo "... imoveis.o"
 	@echo "... imoveis.i"
 	@echo "... imoveis.s"

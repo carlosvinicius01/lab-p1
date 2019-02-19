@@ -3,15 +3,40 @@
 #include <list>
 #include <vector>
 #include "imoveis.hpp"
+#include "SistemaImobiliaria.hpp"
 
 int main()
 {
     std::vector<Imovel*> imovel; // lista dinamica de imoveis
-    
-    imovel.push_back(new Casa); //adicionando mais imoveis
-    imovel.push_back(new Apartamento);
+    Imovel* p;
+    SistemaImobiliaria sist;
 
-    imovel[0]->exibir(); //vai exibir uma casa zerada
-    imovel[1]->exibir(); // vai exibir um apartamento zerado
+    p = new Apartamento;
+
+    sist.cadastraImovel(p);
+
+
+    p = new Casa;
+
+    sist.cadastraImovel(p);
+
+
+    p = new Apartamento;
+
+    sist.cadastraImovel(p);
+
+
+
+    for(Imovel* im : sist.getImoveis())
+    {
+        im->exibir();
+    }
+
+    delete sist;
+
+    for(Imovel* im : sist.getImoveis())
+    {
+        im->exibir();
+    }
 
 }

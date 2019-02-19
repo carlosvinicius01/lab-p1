@@ -6,10 +6,24 @@
 
 #IncludeRegexTransform: 
 
+/home/carlos/Documentos/Coding/cppTests/lp1/lab-p1/projeto2/SistemaImobiliaria.cpp
+SistemaImobiliaria.hpp
+/home/carlos/Documentos/Coding/cppTests/lp1/lab-p1/projeto2/SistemaImobiliaria.hpp
+
+/home/carlos/Documentos/Coding/cppTests/lp1/lab-p1/projeto2/SistemaImobiliaria.hpp
+list
+-
+vector
+-
+imoveis.hpp
+/home/carlos/Documentos/Coding/cppTests/lp1/lab-p1/projeto2/imoveis.hpp
+
 /home/carlos/Documentos/Coding/cppTests/lp1/lab-p1/projeto2/imoveis.cpp
 imoveis.hpp
 /home/carlos/Documentos/Coding/cppTests/lp1/lab-p1/projeto2/imoveis.hpp
 string
+-
+iostream
 -
 
 /home/carlos/Documentos/Coding/cppTests/lp1/lab-p1/projeto2/imoveis.hpp
@@ -23,6 +37,10 @@ string
 -
 list
 -
+vector
+-
 imoveis.hpp
 /home/carlos/Documentos/Coding/cppTests/lp1/lab-p1/projeto2/imoveis.hpp
+SistemaImobiliaria.hpp
+/home/carlos/Documentos/Coding/cppTests/lp1/lab-p1/projeto2/SistemaImobiliaria.hpp
 
