@@ -9,9 +9,11 @@ class MesaDeRestaurante
 	std::vector<Pedido*> pedido;
 	
 	public:
+		~MesaDeRestaurante();
 		void adicionaPedido(Pedido *p);	
 		void zeraPedidos();
 		double calculaTotal();
+		Pedido* getPedido(int i);
 	
 };
 

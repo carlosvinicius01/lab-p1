@@ -1,6 +1,7 @@
 #ifndef PEDIDO_HPP
 #define PEDIDO_HPP
 
+#include <iostream>
 #include <string>
 
 class Pedido
@@ -11,6 +12,11 @@ class Pedido
 		double preco;
 
 		Pedido(int n, int q, std::string d, double p);
+		std::string toString();
+
+		//std::ostream& operator<<(std::ostream& outs, const Pedido& obj);
+		
+
 
 };
 

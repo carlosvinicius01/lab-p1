@@ -3,6 +3,14 @@
 
 #include "MesaDeRestaurante.hpp"
 
+MesaDeRestaurante::~MesaDeRestaurante()
+{
+	for(Pedido *p : pedido)
+	{
+		delete p;
+	}
+}
+
 void MesaDeRestaurante::adicionaPedido(Pedido *p)
 {
 	for(Pedido *i : pedido)
@@ -32,4 +40,10 @@ double MesaDeRestaurante::calculaTotal()
 	}
 	return total;
 }
+
+Pedido* MesaDeRestaurante::getPedido(int i)
+{
+	return pedido[i];
+}
+
 #endif

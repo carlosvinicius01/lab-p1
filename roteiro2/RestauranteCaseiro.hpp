@@ -8,7 +8,7 @@ class RestauranteCaseiro
 	std::vector<MesaDeRestaurante> mesa;
 	
 	public:
-		void adicionaPedido(Pedido *p);	
+		void adicionaPedido(Pedido *p, int m);	
 		double calculaTotalRestaurante();
 		
 };
