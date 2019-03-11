@@ -4,7 +4,15 @@
 #include "MesaDeRestaurante.hpp"
 #include "RestauranteCaseiro.hpp"
 
-RestauranteCaseiro::RestauranteCaseiro(std::vector<MesaDeRestaurante*> m)
+RestauranteCaseiro::~RestauranteCaseiro()
+{
+	for (int i = 0; i < mesa.size(); i++)
+	{
+		delete mesa[i];
+	}
+}
+
+RestauranteCaseiro::RestauranteCaseiro(std::vector<MesaDeRestaurante *> m)
 {
 	mesa = m;
 }
@@ -17,7 +25,7 @@ void RestauranteCaseiro::adicionaPedido(Pedido *p, int m)
 double RestauranteCaseiro::calculaTotalRestaurante()
 {
 	double total = 0;
-	for(MesaDeRestaurante *m : mesa)
+	for (MesaDeRestaurante *m : mesa)
 	{
 		total += m->calculaTotal();
 	}

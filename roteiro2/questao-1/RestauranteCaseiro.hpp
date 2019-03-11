@@ -8,6 +8,7 @@ class RestauranteCaseiro
 	std::vector<MesaDeRestaurante*> mesa;
 	
 	public:
+		virtual ~RestauranteCaseiro();
 		RestauranteCaseiro(std::vector<MesaDeRestaurante*> m);
 		void adicionaMesa(MesaDeRestaurante *m);
 		void adicionaPedido(Pedido *p, int m);	
