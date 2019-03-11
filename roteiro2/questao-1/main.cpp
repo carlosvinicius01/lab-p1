@@ -28,10 +28,15 @@ int main()
 	
 	rest->adicionaPedido(p2, 1);
 
-	std::cout << m2->getPedido(0)->toString();
+	std::cout << m2->getPedido(0)->toString() << "\n";
+	
+	m1->zeraPedidos();
+
+	std::cout << m1->calculaTotal() << "\n";
 
 	delete rest;
-
+	
+	
 	
 
 }
