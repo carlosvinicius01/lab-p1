@@ -13,7 +13,7 @@ class MesaDeRestaurante
 		void adicionaPedido(Pedido *p);	
 		void zeraPedidos();
 		double calculaTotal();
-		Pedido* getPedido(int i);
+		std::vector<Pedido*> getPedido();
 	
 };
 

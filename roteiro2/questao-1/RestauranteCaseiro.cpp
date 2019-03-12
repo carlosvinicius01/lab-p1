@@ -36,4 +36,9 @@ void RestauranteCaseiro::adicionaMesa(MesaDeRestaurante *m)
 	mesa.push_back(m);
 }
 
+std::vector<MesaDeRestaurante *> RestauranteCaseiro::getMesa()
+{
+	return mesa;
+}
+
 #endif

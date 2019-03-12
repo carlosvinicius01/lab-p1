@@ -13,6 +13,7 @@ class RestauranteCaseiro
 		void adicionaMesa(MesaDeRestaurante *m);
 		void adicionaPedido(Pedido *p, int m);	
 		double calculaTotalRestaurante();
+		std::vector<MesaDeRestaurante*> getMesa();
 		
 };
 

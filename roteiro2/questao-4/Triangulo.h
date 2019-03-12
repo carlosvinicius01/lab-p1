@@ -6,9 +6,9 @@
 
 class Triangulo: public FiguraGeometrica{
 	private:
-		double lado;
+		double base, altura;
 	public:
-		Triangulo(std::string n, double l);
+		Triangulo(std::string n, double b, double h);
 		double calcularArea();
 };
 

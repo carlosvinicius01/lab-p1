@@ -41,9 +41,9 @@ double MesaDeRestaurante::calculaTotal()
 	return total;
 }
 
-Pedido* MesaDeRestaurante::getPedido(int i)
+std::vector<Pedido*> MesaDeRestaurante::getPedido()
 {
-	return pedido[i];
+	return pedido;
 }
 
 #endif

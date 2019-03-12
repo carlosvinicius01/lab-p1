@@ -3,15 +3,16 @@
 
 #include "Triangulo.h"
 
-Triangulo::Triangulo(std::string n, double l)
+Triangulo::Triangulo(std::string n, double b, double h)
 {
 	nome = n;	
-	lado = l;
+	base = b;
+	altura = h;
 }
 
 double Triangulo::calcularArea()
 {
-	return 1.73205080757/4*lado*lado;
+	return base*altura/2;
 }
 
 #endif
