@@ -5,10 +5,9 @@
 
 class Trabalhador
 {
-protected:
+  protected:
 	std::string nome;
 	double salario;
-
 };
 
 #endif
