@@ -3,6 +3,9 @@
 #include <list>
 #include <vector>
 #include "imoveis.hpp"
+#include "casa.hpp"
+#include "apartamento.hpp"
+#include "terreno.hpp"
 #include "SistemaImobiliaria.hpp"
 
 int main()
