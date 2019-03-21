@@ -3,7 +3,6 @@
 
 #include "SistemaImobiliaria.hpp"
 
-//classe SistemaImobiliaria
 
 void SistemaImobiliaria::cadastraImovel(Imovel* imovel)
 {
@@ -22,8 +21,6 @@ SistemaImobiliaria::~SistemaImobiliaria()
         delete imoveis[i];
     }
 }
-
-//classe GerenteDePersistencia
 
 
 #endif

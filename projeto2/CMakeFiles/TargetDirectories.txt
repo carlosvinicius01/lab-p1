@@ -1,3 +1,0 @@
-/home/carlos/Documentos/Coding/cppTests/lp1/lab-p1/projeto2/CMakeFiles/rebuild_cache.dir
-/home/carlos/Documentos/Coding/cppTests/lp1/lab-p1/projeto2/CMakeFiles/pj2.dir
-/home/carlos/Documentos/Coding/cppTests/lp1/lab-p1/projeto2/CMakeFiles/edit_cache.dir

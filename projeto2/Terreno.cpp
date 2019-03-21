@@ -1,7 +1,7 @@
 #ifndef TERRENO_CPP
 #define TERRENO_CPP
 
-#include "terreno.hpp"
+#include "Terreno.hpp"
 #include <string>
 #include <iostream>
 

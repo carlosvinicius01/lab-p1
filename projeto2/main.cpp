@@ -2,11 +2,12 @@
 #include <string>
 #include <list>
 #include <vector>
-#include "imoveis.hpp"
-#include "casa.hpp"
-#include "apartamento.hpp"
-#include "terreno.hpp"
+#include "Imoveis.hpp"
+#include "Casa.hpp"
+#include "Apartamento.hpp"
+#include "Terreno.hpp"
 #include "SistemaImobiliaria.hpp"
+#include "GerenteDePersistencia.hpp"
 
 int main()
 {
@@ -18,28 +19,34 @@ int main()
 
     sist.cadastraImovel(p);
 
+		
 
     p = new Casa;
 
     sist.cadastraImovel(p);
 
-
+	
+	
     p = new Apartamento;
 
     sist.cadastraImovel(p);
 
+	p = new Terreno;
 
-
-    for(Imovel* im : sist.getImoveis())
-    {
-        im->exibir();
-    }
-
-    delete sist;
+	sist.cadastraImovel(p);
 
     for(Imovel* im : sist.getImoveis())
     {
         im->exibir();
     }
 
+    
+
+    for(Imovel* im : sist.getImoveis())
+    {
+        im->exibir();
+    }
+	
+	
+	
 }
