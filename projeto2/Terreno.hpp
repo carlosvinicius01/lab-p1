@@ -1,7 +1,7 @@
 #ifndef TERRENO_HPP
 #define TERRENO_HPP
 
-#include "imoveis.hpp"
+#include "Imoveis.hpp"
 
 class Terreno : public Imovel
 {

@@ -7,8 +7,11 @@ project(projeto2)
 add_executable(
 	pj2
 	main.cpp
-	imoveis.cpp
-	imoveis.hpp
-	SistemaImobiliaria.hpp
+	Imoveis.cpp
 	SistemaImobiliaria.cpp
+	GerenteDePersistencia.cpp
+	Apartamento.cpp
+	Casa.cpp
+	Imoveis.cpp
+	Terreno.cpp
 )

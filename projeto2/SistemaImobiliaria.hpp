@@ -4,15 +4,9 @@
 
 #include <list>
 #include <vector>
-#include "imoveis.hpp"
+#include "Imoveis.hpp"
+#include "GerenteDePersistencia.hpp"
 
-
-class GerenteDePersistencia
-{
-    public:
-        std::vector<Imovel*> recuperaListaImoveis();
-        void salvaListaImoveis();
-};
 
 class SistemaImobiliaria
 {
