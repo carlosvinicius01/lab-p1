@@ -24,6 +24,50 @@ void Imovel::setNumero(int num) { numero = num; }
 void Imovel::setValor(double val) { valor = val; }
 void Imovel::setDisponibilidade(char disp) { disponibilidade = disp; }
 
+void Imovel::readEndereco(std::istream& f)
+{
+	size_t size;
+	char *data;
+	
+	f.read((char*) &size, sizeof(size));
+	data = new char[size+1];
+	f.read(data, size);
+	data[size]= '\0';
+	tituloAnuncio = data;
+	delete data;
+
+	f.read((char*) &size, sizeof(size));
+	data = new char[size+1];
+	f.read(data, size);
+	data[size]= '\0';
+	rua = data;
+	delete data;
+
+	f.read((char*) &size, sizeof(size));
+	data = new char[size+1];
+	f.read(data, size);
+	data[size]= '\0';
+	bairro = data;
+	delete data;
+
+	f.read((char*) &size, sizeof(size));
+	data = new char[size+1];
+	f.read(data, size);
+	data[size]= '\0';
+	cep = data;
+	delete data;
+
+	f.read((char*) &size, sizeof(size));
+	data = new char[size+1];
+	f.read(data, size);
+	data[size]= '\0';
+	cidade = data;
+	delete data;
+
+	f.read((char*) &numero, sizeof(numero));
+	f.read((char*) &valor, sizeof(valor));
+	f.read((char*) &disponibilidade, sizeof(disponibilidade));
+}
 
 
 #endif

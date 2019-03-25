@@ -27,6 +27,8 @@ class Apartamento : public Imovel
 
     void cadastrar();
     void exibir();
+
+
 };
 
 #endif

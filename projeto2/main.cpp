@@ -11,42 +11,12 @@
 
 int main()
 {
-    std::vector<Imovel*> imovel; // lista dinamica de imoveis
-    Imovel* p;
-    SistemaImobiliaria sist;
-
-    p = new Apartamento;
-
-    sist.cadastraImovel(p);
-
-		
-
-    p = new Casa;
-
-    sist.cadastraImovel(p);
-
-	
-	
-    p = new Apartamento;
-
-    sist.cadastraImovel(p);
-
-	p = new Terreno;
-
-	sist.cadastraImovel(p);
-
-    for(Imovel* im : sist.getImoveis())
-    {
-        im->exibir();
-    }
-
-    
-
-    for(Imovel* im : sist.getImoveis())
-    {
-        im->exibir();
-    }
-	
-	
-	
+	Imovel *p = new Apartamento();	
+	std::ifstream f;
+	f.open("proerd2019.txt");
+	p->read(f);
+	p->exibir();
+	p->read(f);
+	p->exibir();
+	f.close();
 }

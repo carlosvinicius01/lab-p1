@@ -53,4 +53,38 @@ void Terreno::exibir()
     std::cout << "Area: " << area << std::endl;
 }
 
+
+void Terreno::write(std::ostream& f)
+{
+	size_t size;
+	size = tituloAnuncio.size();
+	f.write((char*) &size, sizeof(size_t));
+	f.write((char*)tituloAnuncio.c_str(), size);
+
+	size = rua.size();
+	f.write((char*) &size, sizeof(size_t));
+	f.write((char*)rua.c_str(), size);
+
+	size = bairro.size();
+	f.write((char*) &size, sizeof(size_t));
+	f.write((char*)bairro.c_str(), size);
+
+	size = cep.size();
+	f.write((char*) &size, sizeof(size_t));
+	f.write((char*)cep.c_str(), size);
+
+	size = cidade.size();
+	f.write((char*) &size, sizeof(size_t));
+	f.write((char*)cidade.c_str(), size);
+
+	f.write((char*)&numero, sizeof(numero));
+	f.write((char*)&valor, sizeof(valor));
+	f.write((char*)&disponibilidade, sizeof(disponibilidade));
+}
+void Terreno::read(std::istream& f)
+{
+	readEndereco(f);
+	
+}
+
 #endif

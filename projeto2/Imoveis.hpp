@@ -2,6 +2,7 @@
 #define IMOVEIS_HPP
 
 #include <string>
+#include <fstream>
 
 class Imovel
 {
@@ -38,6 +39,10 @@ class Imovel
 
     virtual void cadastrar() = 0;
     virtual void exibir() = 0;
+	virtual void write(std::ostream& f) = 0;
+	virtual void read(std::istream& f) = 0;
+	
+	void readEndereco(std::istream& f);	
 };
 
 #endif

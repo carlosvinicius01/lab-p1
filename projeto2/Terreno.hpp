@@ -2,6 +2,7 @@
 #define TERRENO_HPP
 
 #include "Imoveis.hpp"
+#include <fstream>
 
 class Terreno : public Imovel
 {
@@ -17,6 +18,10 @@ class Terreno : public Imovel
 
     void cadastrar();
     void exibir();
+
+	void write(std::ostream& f);
+	void read(std::istream& f);
+
 };
 
 
