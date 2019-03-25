@@ -15,6 +15,7 @@ class Imovel
     int numero;
     double valor;
     char disponibilidade; // 'v' - vender / 'a' - alugar
+	char tipo;
 
   public:
     Imovel() : tituloAnuncio(""), rua(""), bairro(""), cep(""), cidade(""), numero(0), valor(0), disponibilidade(0) {}
@@ -27,6 +28,7 @@ class Imovel
     int getNumero();
     double getValor();
     char getDisponibilidade();
+	char getTipo();
 
     void setTituloAnuncio(std::string t);
     void setRua(std::string r);
@@ -43,6 +45,7 @@ class Imovel
 	virtual void read(std::istream& f) = 0;
 	
 	void readEndereco(std::istream& f);	
+	void writeEndereco(std::ostream& f);
 };
 
 #endif

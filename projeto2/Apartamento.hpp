@@ -11,7 +11,7 @@ class Apartamento : public Imovel
     char posicao;
 
   public:
-    Apartamento() : andar(0), nQuartos(0), nVagas(0), area(0), posicao(0){};
+    Apartamento() : andar(0), nQuartos(0), nVagas(0), area(0), posicao(0){tipo = 'a';};
 
     int getAndar();
     int getNQuartos();
@@ -28,7 +28,8 @@ class Apartamento : public Imovel
     void cadastrar();
     void exibir();
 
-
+	void write(std::ostream& f);
+	void read(std::istream& f);
 };
 
 #endif

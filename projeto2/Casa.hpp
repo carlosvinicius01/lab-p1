@@ -12,7 +12,7 @@ class Casa : public Imovel
     double areaTerreno, areaConstruida;
 
   public:
-    Casa() : nPavimentos(0), nQuartos(0), areaTerreno(0), areaConstruida(0){};
+    Casa() : nPavimentos(0), nQuartos(0), areaTerreno(0), areaConstruida(0){ tipo = 'c';};
 
     int getNPavimentos();
     int getNQuartos();
@@ -26,6 +26,9 @@ class Casa : public Imovel
 
     void cadastrar();
     void exibir();
+
+	void write(std::ostream& f);
+	void read(std::istream& f);
     
 };
 

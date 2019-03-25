@@ -9,7 +9,7 @@ class GerenteDePersistencia
 {
     public:
         std::vector<Imovel*> recuperaListaImoveis();
-        void salvaListaImoveis();
+        void salvaListaImoveis(std::vector<Imovel*> im);
 };
 
 

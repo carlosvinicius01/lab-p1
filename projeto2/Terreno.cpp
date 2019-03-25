@@ -11,32 +11,36 @@ void Terreno::setArea(double a) { area = a; }
 
 void Terreno::cadastrar()
 {
-    std::cout << "Informe o Titulo: ";
-    std::cin >> tituloAnuncio;
+    std::cout << "Informe o Titulo: ";                                                                                     
+	std::getline(std::cin, tituloAnuncio);
 
     std::cout << "Informe a rua: ";
-    std::cin >> rua;
+    std::getline(std::cin, rua);
 
     std::cout << "Informe o bairro: ";
-    std::cin >> bairro;
+    std::getline(std::cin, bairro);
 
     std::cout << "Informe o CEP: ";
-    std::cin >> cep;
+    std::getline(std::cin, cep);
 
     std::cout << "Informe a cidade: ";
-    std::cin >> cidade;
+    std::getline(std::cin, cidade);
 
     std::cout << "Informe o numero: ";
     std::cin >> numero;
+	std::cin.ignore();	
 
     std::cout << "Informe o valor: ";
     std::cin >> valor;
+	std::cin.ignore();
 
     std::cout << "Informe a disponibilidade: ";
     std::cin >> disponibilidade;
+	std::cin.ignore();
 
     std::cout << "Informe a area: ";
     std::cin >> area;
+	std::cin.ignore();
 }
 
 void Terreno::exibir()
@@ -56,34 +60,15 @@ void Terreno::exibir()
 
 void Terreno::write(std::ostream& f)
 {
-	size_t size;
-	size = tituloAnuncio.size();
-	f.write((char*) &size, sizeof(size_t));
-	f.write((char*)tituloAnuncio.c_str(), size);
+	writeEndereco(f);
+	f.write((char*)&area, sizeof(area));	
 
-	size = rua.size();
-	f.write((char*) &size, sizeof(size_t));
-	f.write((char*)rua.c_str(), size);
-
-	size = bairro.size();
-	f.write((char*) &size, sizeof(size_t));
-	f.write((char*)bairro.c_str(), size);
-
-	size = cep.size();
-	f.write((char*) &size, sizeof(size_t));
-	f.write((char*)cep.c_str(), size);
-
-	size = cidade.size();
-	f.write((char*) &size, sizeof(size_t));
-	f.write((char*)cidade.c_str(), size);
-
-	f.write((char*)&numero, sizeof(numero));
-	f.write((char*)&valor, sizeof(valor));
-	f.write((char*)&disponibilidade, sizeof(disponibilidade));
 }
+
 void Terreno::read(std::istream& f)
 {
 	readEndereco(f);
+	f.read((char*)&area, sizeof(area));	
 	
 }
 

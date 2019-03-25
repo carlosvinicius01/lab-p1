@@ -10,7 +10,7 @@ class Terreno : public Imovel
     double area;
 
   public:
-    Terreno() :area(0) {};
+    Terreno() :area(0) {tipo = 't';};
 
     double getArea();
 

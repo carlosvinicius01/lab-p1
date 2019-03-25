@@ -11,12 +11,18 @@
 
 int main()
 {
-	Imovel *p = new Apartamento();	
-	std::ifstream f;
-	f.open("proerd2019.txt");
-	p->read(f);
-	p->exibir();
-	p->read(f);
-	p->exibir();
-	f.close();
+	GerenteDePersistencia g;
+	
+	std::vector<Imovel *> im;
+
+	im.push_back(new Casa());
+	im.push_back(new Terreno());
+	im.push_back(new Terreno());
+	im.push_back(new Apartamento());
+
+	for(auto p : im)
+	{
+		p->cadastrar();
+	}
+	g.salvaListaImoveis(im);
 }

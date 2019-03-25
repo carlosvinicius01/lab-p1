@@ -14,6 +14,7 @@ std::string Imovel::getCidade() { return cidade; }
 int Imovel::getNumero() { return numero; }
 double Imovel::getValor() { return valor; }
 char Imovel::getDisponibilidade() { return disponibilidade; }
+char Imovel::getTipo() { return tipo; }
 
 void Imovel::setTituloAnuncio(std::string t) { tituloAnuncio = t; }
 void Imovel::setRua(std::string r) { rua = r; }
@@ -29,6 +30,8 @@ void Imovel::readEndereco(std::istream& f)
 	size_t size;
 	char *data;
 	
+	f.read((char*) &tipo, sizeof(tipo));
+
 	f.read((char*) &size, sizeof(size));
 	data = new char[size+1];
 	f.read(data, size);
@@ -68,6 +71,40 @@ void Imovel::readEndereco(std::istream& f)
 	f.read((char*) &valor, sizeof(valor));
 	f.read((char*) &disponibilidade, sizeof(disponibilidade));
 }
+
+void Imovel::writeEndereco(std::ostream& f)
+{
+	size_t size;
+
+	f.write((char*)&tipo, sizeof(tipo));
+
+	size = tituloAnuncio.size();
+	f.write((char*) &size, sizeof(size_t));
+	f.write((char*)tituloAnuncio.c_str(), size);
+
+	size = rua.size();
+	f.write((char*) &size, sizeof(size_t));
+	f.write((char*)rua.c_str(), size);
+
+	size = bairro.size();
+	f.write((char*) &size, sizeof(size_t));
+	f.write((char*)bairro.c_str(), size);
+
+	size = cep.size();
+	f.write((char*) &size, sizeof(size_t));
+	f.write((char*)cep.c_str(), size);
+
+	size = cidade.size();
+	f.write((char*) &size, sizeof(size_t));
+	f.write((char*)cidade.c_str(), size);
+
+	f.write((char*)&numero, sizeof(numero));
+	f.write((char*)&valor, sizeof(valor));
+	f.write((char*)&disponibilidade, sizeof(disponibilidade));
+
+	
+}
+
 
 
 #endif
