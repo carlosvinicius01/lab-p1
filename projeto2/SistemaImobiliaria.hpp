@@ -18,10 +18,12 @@ class SistemaImobiliaria
         std::vector<Imovel*> getImoveis();
         std::vector<std::string> getDescricaoImoveis();
         std::vector<Imovel*> getImoveisPorTipo(int tipo);
-        std::vector<Imovel*> getImoveisParaAlugarPorBairro(std::string bairro);
-        std::vector<Imovel*> getImoveisParaVenderPorBairro(std::string bairro);
+        std::vector<Imovel*> getImoveisPorBairro(std::string bairro);
+        std::vector<Imovel*> getImoveisPorValor(double min, double max);
         std::vector<Imovel*> getImoveisPorCidade(std::string cidade);
-
+	std::vector<Imovel*> getImoveisPorTitulo(std::string titulo);
+	std::vector<Imovel*> getImoveisPorDisponibilidade(char disp);
+	void exibirImoveis(std::vector<Imovel*> im);
         virtual ~SistemaImobiliaria();
 };
 
