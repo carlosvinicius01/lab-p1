@@ -4,105 +4,99 @@
 #include "SistemaImobiliaria.hpp"
 #include <algorithm>
 
-void SistemaImobiliaria::cadastraImovel(Imovel* imovel)
+void SistemaImobiliaria::cadastraImovel(Imovel *imovel)
 {
-    imoveis.push_back(imovel);
+	imoveis.push_back(imovel);
 }
 
-std::vector<Imovel*> SistemaImobiliaria::getImoveis()
+std::vector<Imovel *> SistemaImobiliaria::getImoveis()
 {
-    return imoveis;
+	return imoveis;
 }
 
- std::vector<Imovel*> SistemaImobiliaria::getImoveisPorBairro(std::string bairro)
+std::vector<Imovel *> SistemaImobiliaria::getImoveisPorBairro(std::string bairro)
 {
-	std::vector<Imovel*> imoveisporbairro;
-	for(Imovel *imovel : imoveis){
+	std::vector<Imovel *> imoveisporbairro;
+	for (Imovel *imovel : imoveis)
+	{
 		std::string n1 = imovel->getBairro();
-        	std::string n2 = bairro;
-        	std::transform(n1.begin(), n1.end(), n1.begin(), ::tolower);
-        	std::transform(n2.begin(), n2.end(), n2.begin(), ::tolower);
-        	int menor = n1.length() > n2.length() ? n2.length() : n1.length();
-		if(n1.compare(0, menor, n2) == 0)
+		std::string n2 = bairro;
+		std::transform(n1.begin(), n1.end(), n1.begin(), ::tolower);
+		std::transform(n2.begin(), n2.end(), n2.begin(), ::tolower);
+		int menor = n1.length() > n2.length() ? n2.length() : n1.length();
+		if (n1.compare(0, menor, n2) == 0)
 			imoveisporbairro.push_back(imovel);
 	}
 	return imoveisporbairro;
-	
 }
-std::vector<Imovel*> SistemaImobiliaria::getImoveisPorTitulo(std::string titulo)
+std::vector<Imovel *> SistemaImobiliaria::getImoveisPorTitulo(std::string titulo)
 {
-	std::vector<Imovel*> imoveisportipo;
-	for(Imovel *imovel : imoveis){
+	std::vector<Imovel *> imoveisportipo;
+	for (Imovel *imovel : imoveis)
+	{
 		std::string n1 = imovel->getTituloAnuncio();
-        	std::string n2 = titulo;
-        	std::transform(n1.begin(), n1.end(), n1.begin(), ::tolower);
-        	std::transform(n2.begin(), n2.end(), n2.begin(), ::tolower);
-        	int menor = n1.length() > n2.length() ? n2.length() : n1.length();
-		if(n1.compare(0, menor, n2) == 0)
+		std::string n2 = titulo;
+		std::transform(n1.begin(), n1.end(), n1.begin(), ::tolower);
+		std::transform(n2.begin(), n2.end(), n2.begin(), ::tolower);
+		int menor = n1.length() > n2.length() ? n2.length() : n1.length();
+		if (n1.compare(0, menor, n2) == 0)
 			imoveisportipo.push_back(imovel);
 	}
 	return imoveisportipo;
-
 }
 
-std::vector<Imovel*> SistemaImobiliaria::getImoveisPorCidade(std::string cidade)
+std::vector<Imovel *> SistemaImobiliaria::getImoveisPorCidade(std::string cidade)
 {
-	  std::vector<Imovel*> imovelporcidade;
-		for(Imovel *imovel : imoveis){
-			std::string n1 = imovel->getCidade();
-        		std::string n2 = cidade;
-        		std::transform(n1.begin(), n1.end(), n1.begin(), ::tolower);
-        		std::transform(n2.begin(), n2.end(), n2.begin(), ::tolower);
-        		int menor = n1.length() > n2.length() ? n2.length() : n1.length();
-			if(n1.compare(0, menor, n2) == 0)
-				imovelporcidade.push_back(imovel);
-		}
-		return imovelporcidade;
+	std::vector<Imovel *> imovelporcidade;
+	for (Imovel *imovel : imoveis)
+	{
+		std::string n1 = imovel->getCidade();
+		std::string n2 = cidade;
+		std::transform(n1.begin(), n1.end(), n1.begin(), ::tolower);
+		std::transform(n2.begin(), n2.end(), n2.begin(), ::tolower);
+		int menor = n1.length() > n2.length() ? n2.length() : n1.length();
+		if (n1.compare(0, menor, n2) == 0)
+			imovelporcidade.push_back(imovel);
+	}
+	return imovelporcidade;
 }
 
-std::vector<Imovel*> SistemaImobiliaria::getImoveisPorValor(double min, double max)
+std::vector<Imovel *> SistemaImobiliaria::getImoveisPorValor(double min, double max)
 {
-	std::vector<Imovel*> imovelporvalor;
-	for(Imovel *imovel : imoveis){
-		if(imovel->getValor() >= min && imovel->getValor() <= max)
-			imovelporvalor.push_back(imovel);	
+	std::vector<Imovel *> imovelporvalor;
+	for (Imovel *imovel : imoveis)
+	{
+		if (imovel->getValor() >= min && imovel->getValor() <= max)
+			imovelporvalor.push_back(imovel);
 	}
 	return imovelporvalor;
-
 }
 
-std::vector<Imovel*> SistemaImobiliaria::getImoveisPorDisponibilidade(char disp)
+std::vector<Imovel *> SistemaImobiliaria::getImoveisPorDisponibilidade(char disp)
 {
-	std::vector<Imovel*> imovelpordisp;
-	for(Imovel *imovel : imoveis){
-		if(imovel->getDisponibilidade() == disp)
-			imovelpordisp.push_back(imovel);	
+	std::vector<Imovel *> imovelpordisp;
+	for (Imovel *imovel : imoveis)
+	{
+		if (imovel->getDisponibilidade() == disp)
+			imovelpordisp.push_back(imovel);
 	}
 	return imovelpordisp;
-
 }
 
-
-
-
-
-
-void SistemaImobiliaria::exibirImoveis(std::vector<Imovel*> im)
+void SistemaImobiliaria::exibirImoveis(std::vector<Imovel *> im)
 {
-	for(Imovel *p : im){
+	for (Imovel *p : im)
+	{
 		p->exibir();
 	}
-		
 }
-
 
 SistemaImobiliaria::~SistemaImobiliaria()
 {
-    for(int i = 0; i < imoveis.size(); i++)
-    {
-        delete imoveis[i];
-    }
+	for (int i = 0; i < imoveis.size(); i++)
+	{
+		delete imoveis[i];
+	}
 }
-
 
 #endif

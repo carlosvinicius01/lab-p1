@@ -6,35 +6,53 @@
 
 std::vector<Imovel*> GerenteDePersistencia::recuperaListaImoveis()
 {
-	std::vector<Imovel*> im;	
+	std::ifstream f;
+	f.open("DIGANAOASDROGASPROERDA.txt");
 	
+	int numeroImoveis;
+	f.read((char *) &(numeroImoveis), sizeof(numeroImoveis));
+	
+	std::vector<Imovel*> im(numeroImoveis);	
+	
+	for(auto p : im)
+	{
+		char tipo;
+		f.read((char *) &(tipo), sizeof(tipo));
+
+		switch(tipo)
+		{
+			case 'c':
+				p = new Casa();
+				break;
+			case 'a':
+				p = new Apartamento();
+				break;
+			case 't':
+				p = new Terreno();
+				break;
+		}
+		p->read(f);
+	}
+
+	return im;
 
 }
 
 
 void GerenteDePersistencia::salvaListaImoveis(std::vector<Imovel*> im)
 {
-	std::ofstream f1, f2, f3;	
-	f1.open("casa.txt");
-	f2.open("apartamento.txt");
-	f3.open("terreno.txt");
-
+	std::ofstream f;	
+	f.open("DIGANAOASDROGASPROERDA.txt");
+	
+	int numeroImoveis = im.size();
+	f.write((char *) &(numeroImoveis), sizeof(numeroImoveis));
+	
 	for(auto p : im)
-	{	
-		switch(p->getTipo())
-		{
-			case 'c':
-				p->write(f1);
-			case 'a':
-				p->write(f2);
-			case 't':
-				p->write(f3);
-		}	
+	{
+		p->write(f);
 	}
 
-	f1.close();
-	f2.close();
-	f3.close(); 
+	f.close();
 }
 
 #endif

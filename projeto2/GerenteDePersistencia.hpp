@@ -4,6 +4,9 @@
 #include <list>
 #include <vector>
 #include "Imoveis.hpp"
+#include "Casa.hpp"
+#include "Apartamento.hpp"
+#include "Terreno.hpp"
 
 class GerenteDePersistencia
 {

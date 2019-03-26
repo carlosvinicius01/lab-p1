@@ -30,8 +30,6 @@ void Imovel::readEndereco(std::istream& f)
 	size_t size;
 	char *data;
 	
-	f.read((char*) &tipo, sizeof(tipo));
-
 	f.read((char*) &size, sizeof(size));
 	data = new char[size+1];
 	f.read(data, size);
