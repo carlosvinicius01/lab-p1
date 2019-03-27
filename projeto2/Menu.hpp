@@ -11,6 +11,9 @@ class Menu
         int menuEscolher();
         void menuCadastrar(SistemaImobiliaria &sist);
         void menuListar(SistemaImobiliaria &sist);
+	void menuBuscar(SistemaImobiliaria &sist);
+	void menuInicio(SistemaImobiliaria &sist, GerenteDePersistencia &g);
+	void menuRemover(SistemaImobiliaria &sist);
 
 };
 
