@@ -14,6 +14,25 @@ std::vector<Imovel *> SistemaImobiliaria::getImoveis()
 	return imoveis;
 }
 
+void SistemaImobiliaria::setImoveis(std::vector<Imovel*> im)
+{
+	imoveis = im;
+}
+
+std::vector<Imovel*> SistemaImobiliaria::getImoveisPorTipo(char tipo, std::vector<Imovel*> imvs)
+{
+	std::vector<Imovel *> imoveisPorTipo;
+	for (Imovel *imovel : imvs)
+	{
+		if(imovel->getTipo()==tipo)
+		{
+			imoveisPorTipo.push_back(imovel);
+		}
+	}
+	return imoveisPorTipo;
+}
+
+
 std::vector<Imovel *> SistemaImobiliaria::getImoveisPorBairro(std::string bairro, std::vector<Imovel*> imvs)
 {
 	std::vector<Imovel *> imoveisporbairro;

@@ -8,17 +8,22 @@
 #include "Terreno.hpp"
 #include "SistemaImobiliaria.hpp"
 #include "GerenteDePersistencia.hpp"
+#include "Menu.hpp"
 
 int main()
 {
+
 	GerenteDePersistencia g;
 
 	std::vector<Imovel *> im;
 
 	SistemaImobiliaria sist;
 
+	Menu men;
 
-	Imovel *p = new Terreno();
+	sist.setImoveis(g.recuperaListaImoveis());
+
+	/*Imovel *p = new Terreno();
 	p->cadastrar();
 	im.push_back(p);
 
@@ -35,14 +40,12 @@ int main()
 	im.push_back(p);
 
 	g.salvaListaImoveis(im);
-	
+
 	for(auto p : im)
 	{
-		delete p;	
-	}
+		delete p;
+	}*/
 
-	std::vector<Imovel*> im2;
-	im2 = g.recuperaListaImoveis();
-	sist.exibirImoveis(im2);
-
+    men.menuCadastrar(sist);
+	g.salvaListaImoveis(sist.getImoveis());
 }
