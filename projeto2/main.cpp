@@ -12,13 +12,37 @@
 int main()
 {
 	GerenteDePersistencia g;
-	SistemaImobiliaria sist;
-	
+
 	std::vector<Imovel *> im;
 
-	im = g.recuperaListaImoveis();
+	SistemaImobiliaria sist;
 
-	sist.exibirImoveis(im);
 
-	//g.salvaListaImoveis(im);
+	Imovel *p = new Terreno();
+	p->cadastrar();
+	im.push_back(p);
+
+	p = new Casa();
+	p->cadastrar();
+	im.push_back(p);
+
+	p = new Terreno();
+	p->cadastrar();
+	im.push_back(p);
+
+	p = new Apartamento();
+	p->cadastrar();
+	im.push_back(p);
+
+	g.salvaListaImoveis(im);
+	
+	for(auto p : im)
+	{
+		delete p;	
+	}
+
+	std::vector<Imovel*> im2;
+	im2 = g.recuperaListaImoveis();
+	sist.exibirImoveis(im2);
+
 }

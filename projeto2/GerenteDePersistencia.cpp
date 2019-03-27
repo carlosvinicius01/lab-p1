@@ -14,7 +14,7 @@ std::vector<Imovel*> GerenteDePersistencia::recuperaListaImoveis()
 	
 	std::vector<Imovel*> im(numeroImoveis);	
 	
-	for(auto p : im)
+	for(auto &p : im)
 	{
 		char tipo;
 		f.read((char *) &(tipo), sizeof(tipo));
