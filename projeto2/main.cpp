@@ -23,7 +23,7 @@ int main()
 
 	sist.setImoveis(g.recuperaListaImoveis());
 
-	/*Imovel *p = new Terreno();
+	/* Imovel *p = new Terreno();
 	p->cadastrar();
 	im.push_back(p);
 
@@ -39,13 +39,14 @@ int main()
 	p->cadastrar();
 	im.push_back(p);
 
-	g.salvaListaImoveis(im);
+	g.salvaListaImoveis(im); */
 
-	for(auto p : im)
+	/*for(auto p : im)
 	{
 		delete p;
 	}*/
-
-    men.menuCadastrar(sist);
+	
+	sist.setImoveis(sist.remover(sist.getImoveis(), 0));
+    men.menuListar(sist);
 	g.salvaListaImoveis(sist.getImoveis());
 }

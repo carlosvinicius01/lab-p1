@@ -122,10 +122,11 @@ SistemaImobiliaria::~SistemaImobiliaria()
 	}
 }
 
-void remover(std::vector<Imovel *> im, int i)
+std::vector<Imovel *> SistemaImobiliaria::remover(std::vector<Imovel *> im, int i)
 {
 	delete im[i];
 	im.erase(im.begin() + i);
+	return im;
 }
 
 

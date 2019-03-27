@@ -25,7 +25,7 @@ class SistemaImobiliaria
 		std::vector<Imovel*> getImoveisPorTitulo(std::string titulo, std::vector<Imovel*> imvs);
 		std::vector<Imovel*> getImoveisPorDisponibilidade(char disp, std::vector<Imovel*> imvs);
 		void exibirImoveis(std::vector<Imovel*> im);
-		void remover(std::vector<Imovel *> im);
+		std::vector<Imovel *>  remover(std::vector<Imovel *> im, int i);
 
         virtual ~SistemaImobiliaria();
 };
