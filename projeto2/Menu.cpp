@@ -176,8 +176,21 @@ void Menu::menuRemover(SistemaImobiliaria &sist)
 {	int indice;	
 	std::cout << "Indice a ser removido: \n";
 	std::cin >> indice;
+	std::cin.ignore();
 	sist.setImoveis(sist.remover(sist.getImoveis(), indice));
 }
+
+void Menu::menuEditar(SistemaImobiliaria &sist)
+{
+	int indice;	
+	std::cout << "Indice a ser editado: \n";
+	std::cin >> indice;
+	std::cin.ignore();
+	sist.getImoveis()[indice]->exibir();
+
+	sist.getImoveis()[indice]->cadastrar();
+}
+
 
 void Menu::menuInicio(SistemaImobiliaria &sist, GerenteDePersistencia &g)
 {	
@@ -209,6 +222,7 @@ void Menu::menuInicio(SistemaImobiliaria &sist, GerenteDePersistencia &g)
 				
 				break;
 		case 5:
+				menuEditar(sist);
 				break;
 		case 6:
 				g.salvaListaImoveis(sist.getImoveis());

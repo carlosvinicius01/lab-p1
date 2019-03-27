@@ -14,6 +14,7 @@ class Menu
 	void menuBuscar(SistemaImobiliaria &sist);
 	void menuInicio(SistemaImobiliaria &sist, GerenteDePersistencia &g);
 	void menuRemover(SistemaImobiliaria &sist);
+	void menuEditar(SistemaImobiliaria &sist);
 
 };
 
