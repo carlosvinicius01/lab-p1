@@ -14,10 +14,10 @@ std::vector<Imovel *> SistemaImobiliaria::getImoveis()
 	return imoveis;
 }
 
-std::vector<Imovel *> SistemaImobiliaria::getImoveisPorBairro(std::string bairro)
+std::vector<Imovel *> SistemaImobiliaria::getImoveisPorBairro(std::string bairro, std::vector<Imovel*> imvs)
 {
 	std::vector<Imovel *> imoveisporbairro;
-	for (Imovel *imovel : imoveis)
+	for (Imovel *imovel : imvs)
 	{
 		std::string n1 = imovel->getBairro();
 		std::string n2 = bairro;
@@ -29,10 +29,10 @@ std::vector<Imovel *> SistemaImobiliaria::getImoveisPorBairro(std::string bairro
 	}
 	return imoveisporbairro;
 }
-std::vector<Imovel *> SistemaImobiliaria::getImoveisPorTitulo(std::string titulo)
+std::vector<Imovel *> SistemaImobiliaria::getImoveisPorTitulo(std::string titulo, std::vector<Imovel*> imvs)
 {
 	std::vector<Imovel *> imoveisportipo;
-	for (Imovel *imovel : imoveis)
+	for (Imovel *imovel : imvs)
 	{
 		std::string n1 = imovel->getTituloAnuncio();
 		std::string n2 = titulo;
@@ -45,10 +45,10 @@ std::vector<Imovel *> SistemaImobiliaria::getImoveisPorTitulo(std::string titulo
 	return imoveisportipo;
 }
 
-std::vector<Imovel *> SistemaImobiliaria::getImoveisPorCidade(std::string cidade)
+std::vector<Imovel *> SistemaImobiliaria::getImoveisPorCidade(std::string cidade, std::vector<Imovel*> imvs)
 {
 	std::vector<Imovel *> imovelporcidade;
-	for (Imovel *imovel : imoveis)
+	for (Imovel *imovel : imvs)
 	{
 		std::string n1 = imovel->getCidade();
 		std::string n2 = cidade;
@@ -61,10 +61,10 @@ std::vector<Imovel *> SistemaImobiliaria::getImoveisPorCidade(std::string cidade
 	return imovelporcidade;
 }
 
-std::vector<Imovel *> SistemaImobiliaria::getImoveisPorValor(double min, double max)
+std::vector<Imovel *> SistemaImobiliaria::getImoveisPorValor(double min, double max, std::vector<Imovel*> imvs)
 {
 	std::vector<Imovel *> imovelporvalor;
-	for (Imovel *imovel : imoveis)
+	for (Imovel *imovel : imvs)
 	{
 		if (imovel->getValor() >= min && imovel->getValor() <= max)
 			imovelporvalor.push_back(imovel);
@@ -72,10 +72,10 @@ std::vector<Imovel *> SistemaImobiliaria::getImoveisPorValor(double min, double 
 	return imovelporvalor;
 }
 
-std::vector<Imovel *> SistemaImobiliaria::getImoveisPorDisponibilidade(char disp)
+std::vector<Imovel *> SistemaImobiliaria::getImoveisPorDisponibilidade(char disp, std::vector<Imovel*> imvs)
 {
 	std::vector<Imovel *> imovelpordisp;
-	for (Imovel *imovel : imoveis)
+	for (Imovel *imovel : imvs)
 	{
 		if (imovel->getDisponibilidade() == disp)
 			imovelpordisp.push_back(imovel);
