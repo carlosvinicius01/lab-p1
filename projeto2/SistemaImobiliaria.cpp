@@ -3,6 +3,7 @@
 
 #include "SistemaImobiliaria.hpp"
 #include <algorithm>
+#include <iostream>
 
 void SistemaImobiliaria::cadastraImovel(Imovel *imovel)
 {
@@ -104,9 +105,12 @@ std::vector<Imovel *> SistemaImobiliaria::getImoveisPorDisponibilidade(char disp
 
 void SistemaImobiliaria::exibirImoveis(std::vector<Imovel *> im)
 {
+	int i = 0;
 	for (Imovel *p : im)
 	{
+		std::cout << i << " ";
 		p->exibir();
+		i++;
 	}
 }
 
@@ -117,5 +121,12 @@ SistemaImobiliaria::~SistemaImobiliaria()
 		delete imoveis[i];
 	}
 }
+
+void remover(std::vector<Imovel *> im, int i)
+{
+	delete im[i];
+	im.erase(im.begin() + i);
+}
+
 
 #endif
