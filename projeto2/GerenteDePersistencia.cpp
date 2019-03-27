@@ -7,7 +7,7 @@
 std::vector<Imovel*> GerenteDePersistencia::recuperaListaImoveis()
 {
 	std::ifstream f;
-	f.open("DIGANAOASDROGASPROERDA.txt");
+	f.open("DIGANAOASDROGASPROERDA.txt", std::ios::binary);
 	
 	int numeroImoveis;
 	f.read((char *) &(numeroImoveis), sizeof(numeroImoveis));
@@ -42,7 +42,7 @@ std::vector<Imovel*> GerenteDePersistencia::recuperaListaImoveis()
 void GerenteDePersistencia::salvaListaImoveis(std::vector<Imovel*> im)
 {
 	std::ofstream f;	
-	f.open("DIGANAOASDROGASPROERDA.txt");
+	f.open("DIGANAOASDROGASPROERDA.txt", std::ios::binary);
 	
 	int numeroImoveis = im.size();
 	f.write((char *) &(numeroImoveis), sizeof(numeroImoveis));
