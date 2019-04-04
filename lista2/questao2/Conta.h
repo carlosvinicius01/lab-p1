@@ -6,25 +6,26 @@
 
 class Conta : public IConta
 {
-    std::string nome;
+  protected:
+    std::string nomeCliente, numeroConta;
     double salarioMensal, saldo, limite;
-    int numeroConta;
 
-    void setSalarioMensal(double);
-    void setSaldo(double);
-    void setLimite(double);
-    void setNumeroConta(int);
-    void setNome(std::string);
-
+  public:
+    Conta(std::string n, std::string c, double sm, double s);
+    Conta();
+    void setNomeCliente(std::string n);
+    void setNumeroConta(std::string c);
+    void setSalarioMensal(double sm);
+    void setSaldo(double s);
+    void setLimite(double l);
+    std::string getNomeCliente();
+    std::string getNumeroconta();
     double getSalarioMensal();
     double getSaldo();
     double getLimite();
-    int getNumeroConta();
-    std::string getNome();
-
-    void sacar(double);
-    void depositar(double);
-    void definirLimite();
+    virtual void definirLimite();
+    void sacar(double valor);
+    void depositar(double valor);
 };
 
-#endif
+#endif // CONTA_H

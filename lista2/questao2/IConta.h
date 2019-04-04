@@ -1,10 +1,12 @@
-#ifndef ICONTA_H 
+#ifndef ICONTA_H
 #define ICONTA_H
 
 class IConta
 {
-    virtual void sacar(double) = 0;
-    virtual void depositar(double) = 0;
+  public:
+    virtual void sacar(double valor) = 0;
+    virtual void depositar(double valor) = 0;
+    virtual ~IConta();
 };
 
-#endif
+#endif // ICONTA_H
