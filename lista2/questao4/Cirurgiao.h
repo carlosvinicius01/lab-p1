@@ -1,7 +1,7 @@
 #ifndef CIRURGIAO_H
 #define CIRURGIAO_H
 
-#include <Medico.h>
+#include "Medico.h"
 
 class Cirurgiao : public Medico
 {
