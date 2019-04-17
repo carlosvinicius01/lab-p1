@@ -26,8 +26,6 @@ int relogin = 0;
 std::chrono::steady_clock sc;
 auto start = sc.now();
 
-
-
 int main(int argc, const char **argv)
 {
     VideoCapture capture;
@@ -37,9 +35,8 @@ int main(int argc, const char **argv)
     cascadeName = "/usr/local/share/OpenCV/haarcascades/haarcascade_frontalface_alt.xml";
     scale = 1;
     srand(time(NULL));
-    macax = rand() % 590;
-    macay = rand() % 430;
-
+    macax = rand() % (590 - 200) + 100;
+    macay = rand() % (430 - 200) + 100;
 
     if (!cascade.load(cascadeName))
     {
@@ -135,41 +132,37 @@ void detectAndDraw(Mat &img, CascadeClassifier &cascade, double scale)
         circle(img, Point(centrox, centroy), cvRound((r.width + r.height) / 4.5), color, 3, 8, 0);
 
         Mat img_copy;
-        cv::resize(img_object, img_copy, cv::Size(), r.height / 40.0, r.width / 40.0);
+        cv::resize(img_object, img_copy, cv::Size(), r.height / 50.0, r.width / 50.0);
 
         if (r.x + (int)img_copy.cols < 640 && r.y + (int)img_copy.rows < 480)
         {
             img_copy.copyTo(img.colRange(r.x, r.x + img_copy.cols).rowRange(r.y, r.y + img_copy.rows));
         }
 
-        if (std::abs(centrox - macax) <= 60 && std::abs(centroy - macay) <= 60)
+        if (std::abs(centrox - macax) <= 100 && std::abs(centroy - macay) <= 100)
         {
-
-            macax = rand() % 590;
-            macay = rand() % 430;
+            macax = rand() % (590 - 200) + 100;
+            macay = rand() % (430 - 200) + 100;
             score++;
         }
     }
     img_rdm.copyTo(img.colRange(macax, macax + img_rdm.cols).rowRange(macay, macay + img_rdm.rows));
     cv::flip(img, img_espelhada, 1);
 
-    drawText(img_espelhada, score, Point(500,50));
-		
-	auto end = sc.now(); 
-	   auto time_span = static_cast<chrono::duration<double>>(end - start);
-	   
-		if(time_span.count() >= 1)
-		{	
-			//cout<<relogin<<"\n";
-			relogin++;
-			start = sc.now();
-		}
+    drawText(img_espelhada, score, Point(500, 50));
 
-	drawText(img_espelhada, relogin, Point(20,50));
-        imshow(title, img_espelhada);
+    auto end = sc.now();
+    auto time_span = static_cast<chrono::duration<double>>(end - start);
 
-    
-  
+    if (time_span.count() >= 1)
+    {
+        //cout<<relogin<<"\n";
+        relogin++;
+        start = sc.now();
+    }
+
+    drawText(img_espelhada, relogin, Point(20, 50));
+    imshow(title, img_espelhada);
 }
 
 void drawText(Mat &image, int score, Point p)
