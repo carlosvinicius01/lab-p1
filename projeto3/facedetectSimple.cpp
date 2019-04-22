@@ -1,6 +1,9 @@
 #include "opencv2/objdetect.hpp"
 #include "opencv2/highgui.hpp"
 #include "opencv2/imgproc.hpp"
+#include "Menu.hpp"
+#include "Figura.hpp"
+#include "Frutinha.hpp"
 #include <iostream>
 #include <exception>
 #include <unistd.h>
@@ -48,6 +51,7 @@ int main(int argc, const char **argv)
     arq.open("data.txt", ios::binary);
     arq.read((char *)&recorde, sizeof(recorde));
     arq.close();
+
     while(1){
 
     cout << "\nMenu:" << endl
@@ -59,7 +63,7 @@ int main(int argc, const char **argv)
 
     switch(select)
     {
-        case 1:
+        case 1:int showMenu();
             img_rdm = ChangeFruit();// gera a primeira fruta aleatoriamente
             
 

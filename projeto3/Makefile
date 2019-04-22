@@ -5,7 +5,7 @@ LDFLAGS += $(shell pkg-config --libs --static opencv)
 
 all: facedetectSimple
 
-facedetectSimple: facedetectSimple.o; $(CXX) $< -o $@ $(LDFLAGS)
+facedetectSimple: facedetectSimple.o Texto.o Menu.o Figura.o; $(CXX) $< -o $@ $(LDFLAGS)
 
 %.o: %.cpp; $(CXX) $< -o $@ $(CXXFLAGS)
 
