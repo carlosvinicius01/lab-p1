@@ -11,6 +11,7 @@ int Menu::showMenu()
          << "3 - Sair\n";
 
     cin >> select;
+    return select;
 }
 
 

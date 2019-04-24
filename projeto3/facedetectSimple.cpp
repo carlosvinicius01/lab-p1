@@ -1,9 +1,8 @@
 #include "opencv2/objdetect.hpp"
 #include "opencv2/highgui.hpp"
 #include "opencv2/imgproc.hpp"
-#include "Menu.hpp"
 #include "Figura.hpp"
-#include "Frutinha.hpp"
+#include "Texto.hpp"
 #include <iostream>
 #include <exception>
 #include <unistd.h>
@@ -35,6 +34,7 @@ auto start = sc.now();
 
 int main(int argc, const char **argv)
 {
+    
     int select;
     int recorde;
     VideoCapture capture;
@@ -54,6 +54,7 @@ int main(int argc, const char **argv)
 
     while(1){
 
+
     cout << "\nMenu:" << endl
         << "1 - Jogar\n"
         << "2 - Recorde\n"
@@ -63,7 +64,7 @@ int main(int argc, const char **argv)
 
     switch(select)
     {
-        case 1:int showMenu();
+        case 1:
             img_rdm = ChangeFruit();// gera a primeira fruta aleatoriamente
             
 
@@ -111,7 +112,7 @@ int main(int argc, const char **argv)
                     if (frame.empty())
                         break;
 
-                    /*for (int m=0 ; m<400 ; m++) {
+                    /*for (int m=0 ; m<400 ; m++) {Menu m1 = Menu();
                     //unsigned char * p = frame.ptr(m, m);
                     p[0] = 255;
                     p[1] = 0;
@@ -217,7 +218,6 @@ void detectAndDraw(Mat &img, CascadeClassifier &cascade, double scale)
     
     
     cv::flip(img, img_espelhada, 1);
-
     drawText(img_espelhada,"Score: ", score, Point(450, 50));
 
     auto end = sc.now();

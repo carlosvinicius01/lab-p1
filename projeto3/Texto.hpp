@@ -10,9 +10,13 @@ using namespace cv;
 
 class Texto
 {
-    public:
-    void drawTexto(Mat &image, string text, Point p);
+  private:
+    string text;
+    Point posicao;
 
+  public:
+    void drawTexto(Mat &image, Point p);
+    void set_text(string texto);
 };
 
 #endif
