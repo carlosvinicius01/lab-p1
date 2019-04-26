@@ -9,15 +9,14 @@ using namespace cv;
 
 class Texto
 {
-	private: 
+private:
 	Mat img;
 	std::string text;
-    public:
-    void drawTexto(int x, int y);
-		void setTexto(std::string);
+
+public:
+	void drawTexto(int x, int y);
+	void setTexto(std::string);
+	Texto(string, Mat);
 };
 
 #endif
-
-
-

@@ -9,4 +9,4 @@ facedetectSimple: facedetectSimple.o Texto.o Menu.o Figura.o; $(CXX) $< -o $@ $(
 
 %.o: %.cpp; $(CXX) $< -o $@ $(CXXFLAGS)
 
-clean: ; rm -f facedetectSimple.o facedetectSimple
+clean: ; rm -f *.o facedetectSimple

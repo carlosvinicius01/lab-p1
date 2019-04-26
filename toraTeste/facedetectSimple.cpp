@@ -1,8 +1,8 @@
 #include "opencv2/objdetect.hpp"
 #include "opencv2/highgui.hpp"
 #include "opencv2/imgproc.hpp"
-#include "Figura.hpp"
-#include "Texto.hpp"
+//#include "Figura.hpp"
+//#include "Texto.hpp"
 #include <iostream>
 #include <exception>
 #include <unistd.h>
@@ -14,6 +14,30 @@
 
 using namespace std;
 using namespace cv;
+
+class Texto
+{
+  private:
+    Mat img;
+    std::string text;
+
+  public:
+    void drawTexto(int x, int y);
+    void setTexto(std::string);
+    void setImg(Mat);
+    Texto(string, Mat);
+    Texto() {}
+};
+
+class Figura
+{
+    Mat img;
+
+  public:
+    void drawFigura(Mat frame, double xPos, double yPos);
+    Figura(string img_name);
+    Figura() {}
+};
 
 void detectAndDraw(Mat &img, CascadeClassifier &cascade, double scale);
 void drawText(Mat &image, string text, int score, Point p);
@@ -32,9 +56,15 @@ int relogin = 0;
 std::chrono::steady_clock sc;
 auto start = sc.now();
 
+Texto texto_score;
+Texto texto_relogin;
+
+Figura thomas("thomas.png"), fruta_1("apple.png"), fruta_2("laranja.png"), fruta_3("pera.png"), fruta_4("morango.png");
+
+
 int main(int argc, const char **argv)
 {
-    
+
     int select;
     int recorde;
     VideoCapture capture;
@@ -52,21 +82,20 @@ int main(int argc, const char **argv)
     arq.read((char *)&recorde, sizeof(recorde));
     arq.close();
 
-    while(1){
-
-
-    cout << "\nMenu:" << endl
-        << "1 - Jogar\n"
-        << "2 - Recorde\n"
-        << "3 - Sair\n";
-
-    cin >> select;
-
-    switch(select)
+    while (1)
     {
+
+        cout << "\nMenu:" << endl
+             << "1 - Jogar\n"
+             << "2 - Recorde\n"
+             << "3 - Sair\n";
+
+        cin >> select;
+
+        switch (select)
+        {
         case 1:
-            img_rdm = ChangeFruit();// gera a primeira fruta aleatoriamente
-            
+            img_rdm = ChangeFruit(); // gera a primeira fruta aleatoriamente
 
             if (!cascade.load(cascadeName))
             {
@@ -118,26 +147,26 @@ int main(int argc, const char **argv)
                     p[1] = 0;
                     p[2] = 0;
                 }*/
-                    
+
                     detectAndDraw(frame, cascade, scale);
-                    if(relogin > 60){
-                                               
-                            if(score > recorde){
-                                cout << score << endl;
-                                recorde = score;
-                                }
-                            relogin = 0;
-                            score = 0;
-                            cvDestroyAllWindows();
-                            break;
-                             
-                             
+                    if (relogin > 60)
+                    {
+
+                        if (score > recorde)
+                        {
+                            cout << score << endl;
+                            recorde = score;
+                        }
+                        relogin = 0;
+                        score = 0;
+                        cvDestroyAllWindows();
+                        break;
                     }
 
                     char c = (char)waitKey(10);
                     if (c == 27 || c == 'q' || c == 'Q')
                         break;
-                }     
+                }
             }
             break;
 
@@ -148,15 +177,14 @@ int main(int argc, const char **argv)
         case 3:
             ofstream arq;
             arq.open("data.txt", ios::binary);
-            //cout << recorde << endl;   
+            //cout << recorde << endl;
             arq.write((char *)&recorde, sizeof(recorde));
             arq.close();
             return 0;
             break;
-
         }
     }
-    
+
     return 0;
 }
 
@@ -195,10 +223,11 @@ void detectAndDraw(Mat &img, CascadeClassifier &cascade, double scale)
         cv::resize(img_object, img_copy, cv::Size(), r.height / 367.0, r.width / 317.0);
 
         if (r.x + (int)img_copy.cols < 640 && r.y + (int)img_copy.rows < 480)
-            {
+        {
             //img_copy.copyTo(img.colRange(r.x, r.x + img_copy.cols).rowRange(r.y, r.y + img_copy.rows));
-            drawTransparency(img, img_copy, r.x,  r.y);
-            }
+            //drawTransparency(img, img_copy, r.x, r.y);
+            thomas.drawFigura(img, r.x, r.y);
+        }
 
         if (std::abs(centrox - macax) <= 100 && std::abs(centroy - macay) <= 100)
         {
@@ -206,19 +235,20 @@ void detectAndDraw(Mat &img, CascadeClassifier &cascade, double scale)
             macay = rand() % (430 - 200) + 100;
             score++;
             system("mplayer narutosad.mp3 &");
-            img_rdm = ChangeFruit(); // fruta aleatoria
-        
+            //img_rdm = ChangeFruit(); // fruta aleatoria
         }
     }
     //img_rdm.copyTo(img.colRange(macax, macax + img_rdm.cols).rowRange(macay, macay + img_rdm.rows));
-    
-    
+
     drawTransparency(img, img_rdm, macax, macay);
-    
-    
-    
+
+
+
+
+
     cv::flip(img, img_espelhada, 1);
-    drawText(img_espelhada,"Score: ", score, Point(450, 50));
+
+    //drawText(img_espelhada, "Score: ", score, Point(450, 50));
 
     auto end = sc.now();
     auto time_span = static_cast<chrono::duration<double>>(end - start);
@@ -230,13 +260,23 @@ void detectAndDraw(Mat &img, CascadeClassifier &cascade, double scale)
         start = sc.now();
     }
 
-    //Texto *juninho;
-    //juninho = new Texto();
     //drawText(img_espelhada, "Time: ",relogin, Point(20, 50));
-    imshow(title, img_espelhada);
-    
-}
 
+
+
+
+    texto_score.setTexto("Time: " + std::to_string(relogin));
+    texto_score.setImg(img_espelhada);
+    texto_score.drawTexto(20, 50);
+
+    texto_relogin.setTexto("Score: " + std::to_string(score));
+    texto_relogin.setImg(img_espelhada);
+    texto_relogin.drawTexto(450, 50);
+
+
+
+    imshow(title, img_espelhada);
+}
 
 void drawText(Mat &image, string text, int score, Point p)
 {
@@ -247,46 +287,94 @@ void drawText(Mat &image, string text, int score, Point p)
             1, LINE_AA);             // line thickness and type
 }
 
-void drawTransparency(Mat frame, Mat transp, double xPos, double yPos) {
+void drawTransparency(Mat frame, Mat transp, double xPos, double yPos)
+{
     Mat mask;
     vector<Mat> layers;
-     
+
     split(transp, layers); // seperate channels
-    Mat rgb[3] = { layers[0],layers[1],layers[2] };
-    mask = layers[3]; // png's alpha channel used as mask
-    merge(rgb, 3, transp);  // put together the RGB channels, now transp insn't transparent 
+    Mat rgb[3] = {layers[0], layers[1], layers[2]};
+    mask = layers[3];      // png's alpha channel used as mask
+    merge(rgb, 3, transp); // put together the RGB channels, now transp insn't transparent
     transp.copyTo(frame.rowRange(yPos, yPos + transp.rows).colRange(xPos, xPos + transp.cols), mask);
 }
 
-Mat ChangeFruit(){
-   Mat img_fruit1 = imread("apple.png", IMREAD_UNCHANGED);
-   Mat img_fruit2 = imread("laranja.png", IMREAD_UNCHANGED);
-   Mat img_fruit3 = imread("pera.png", IMREAD_UNCHANGED);
-   Mat img_fruit4 = imread("morango.png", IMREAD_UNCHANGED);
-   Mat img_selected;
+Mat ChangeFruit()
+{
+    Mat img_fruit1 = imread("apple.png", IMREAD_UNCHANGED);
+    Mat img_fruit2 = imread("laranja.png", IMREAD_UNCHANGED);
+    Mat img_fruit3 = imread("pera.png", IMREAD_UNCHANGED);
+    Mat img_fruit4 = imread("morango.png", IMREAD_UNCHANGED);
+    Mat img_selected;
 
     srand(time(NULL));
 
-    int i = rand()%(4) + 1;
+    int i = rand() % (4) + 1;
     cout << i << endl;
-    
 
-   switch(i){
-       case 1:
-            img_selected = img_fruit1;     
-            break; 
-       case 2:
-            img_selected = img_fruit2;
-            break;
-       case 3:
-            img_selected = img_fruit3;
-            break;
-       case 4:
-            img_selected = img_fruit4;
-            break; 
-        default:
-            img_selected = img_fruit1; 
-            break;              
-   }
+    switch (i)
+    {
+    case 1:
+        img_selected = img_fruit1;
+        break;
+    case 2:
+        img_selected = img_fruit2;
+        break;
+    case 3:
+        img_selected = img_fruit3;
+        break;
+    case 4:
+        img_selected = img_fruit4;
+        break;
+    default:
+        img_selected = img_fruit1;
+        break;
+    }
     return img_selected;
+}
+
+// CLASSE TEXTO AQUI
+
+Texto::Texto(string str, Mat im)
+{
+    text = str;
+    img = im;
+}
+
+void Texto::setTexto(std::string str)
+{
+    text = str;
+}
+
+void Texto::setImg(Mat im)
+{
+    img = im;
+}
+
+void Texto::drawTexto(int x, int y)
+{
+    Point p = Point(x, y);
+    putText(img, text,
+            p,
+            FONT_HERSHEY_COMPLEX, 1, // font face and scale
+            Scalar(255, 255, 255),   // white
+            1, LINE_AA);             // line thickness and type
+}
+
+// CLASSE FIGURA AQUI
+
+Figura::Figura(string img_name)
+{
+    img = imread(img_name, IMREAD_UNCHANGED);
+}
+
+void Figura::drawFigura(Mat frame, double xPos, double yPos)
+{
+    Mat mask;
+    vector<Mat> layers;
+    split(img, layers); // seperate channels
+    Mat rgb[3] = {layers[0], layers[1], layers[2]};
+    mask = layers[3];   // png's alpha channel used as mask
+    merge(rgb, 3, img); // put together the RGB channels, now transp insn't transparent
+    img.copyTo(frame.rowRange(yPos, yPos + img.rows).colRange(xPos, xPos + img.cols), mask);
 }

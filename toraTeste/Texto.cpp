@@ -1,8 +1,18 @@
 #include "Texto.hpp"
 
+Texto::Texto(string str, Mat im)
+{
+    text = str;
+    img = im;
+}
 
 
 void Texto::setTexto(std::string str)
+{
+	text = str;
+}
+
+void Texto::setTexto(Mat str)
 {
 	text = str;
 }
