@@ -174,7 +174,7 @@ int main(int argc, const char **argv)
                             recorde = score;
                         }
                         // relogin = 0;
-                        // score = 0;
+                        score = 0;
                         relogio.zerarTempo();
                         cvDestroyAllWindows();
                         //cvDestroyAllHumans();
@@ -247,7 +247,7 @@ void detectAndDraw(Mat &img, CascadeClassifier &cascade, double scale)
            // thomas.drawFigura(img, r.x, r.y);
         }
 
-        if (std::abs(centrox - macax) <= 100 && std::abs(centroy - macay) <= 100)
+        if (std::abs(centrox - macax) <= 50 && std::abs(centroy - macay) <= 50)
         {
             macax = rand() % (590 - 200) + 100;
             macay = rand() % (430 - 200) + 100;
