@@ -104,7 +104,8 @@ int main(int argc, const char **argv)
         cout << "\nMenu:" << endl
              << "1 - Jogar\n"
              << "2 - Recorde\n"
-             << "3 - Sair\n";
+             << "3 - Sair\n" 
+             << "4 - Zerar recorde\n";
 
         cin >> select;
 
@@ -192,15 +193,24 @@ int main(int argc, const char **argv)
             cout << "RECORDE: " << recorde << endl;
             break;
 
-        case 3:
+        case 3:{
             ofstream arq;
             arq.open("data.txt", ios::binary);
             //cout << recorde << endl;
             arq.write((char *)&recorde, sizeof(recorde));
             arq.close();
             return 0;
+            break;}
+
+        case 4:{
+            ofstream arq2;
+            recorde = 0;
+            arq2.open("data.txt", ios::binary);
+            arq2.write((char *)&recorde, sizeof(recorde));
+            arq2.close();
             break;
         }
+      }
     }
 
     return 0;
