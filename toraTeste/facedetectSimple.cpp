@@ -31,13 +31,27 @@ class Texto
 
 class Figura
 {
-    Mat img;
-
   public:
-    void drawFigura(Mat frame, double xPos, double yPos);
-    Figura(string img_name);
+    void drawFigura(Mat frame, Mat transp, double xPos, double yPos);
     Figura() {}
 };
+
+class Relogio
+{
+    std::chrono::steady_clock sc;
+    std::chrono::steady_clock::time_point start;
+    std::chrono::steady_clock::time_point end;
+
+    int relogin;
+
+    public:
+        Relogio();
+        int getTempoAtual();
+        void zerarTempo();
+        void atualizaTempo();
+};
+
+
 
 void detectAndDraw(Mat &img, CascadeClassifier &cascade, double scale);
 void drawText(Mat &image, string text, int score, Point p);
@@ -59,7 +73,9 @@ auto start = sc.now();
 Texto texto_score;
 Texto texto_relogin;
 
-Figura thomas("thomas.png"), fruta_1("apple.png"), fruta_2("laranja.png"), fruta_3("pera.png"), fruta_4("morango.png");
+Figura fruta_1;
+
+Relogio relogio;
 
 
 int main(int argc, const char **argv)
@@ -149,7 +165,7 @@ int main(int argc, const char **argv)
                 }*/
 
                     detectAndDraw(frame, cascade, scale);
-                    if (relogin > 60)
+                    if (relogio.getTempoAtual() > 60)
                     {
 
                         if (score > recorde)
@@ -157,9 +173,11 @@ int main(int argc, const char **argv)
                             cout << score << endl;
                             recorde = score;
                         }
-                        relogin = 0;
-                        score = 0;
+                        // relogin = 0;
+                        // score = 0;
+                        relogio.zerarTempo();
                         cvDestroyAllWindows();
+                        //cvDestroyAllHumans();
                         break;
                     }
 
@@ -226,7 +244,7 @@ void detectAndDraw(Mat &img, CascadeClassifier &cascade, double scale)
         {
             //img_copy.copyTo(img.colRange(r.x, r.x + img_copy.cols).rowRange(r.y, r.y + img_copy.rows));
             //drawTransparency(img, img_copy, r.x, r.y);
-            thomas.drawFigura(img, r.x, r.y);
+           // thomas.drawFigura(img, r.x, r.y);
         }
 
         if (std::abs(centrox - macax) <= 100 && std::abs(centroy - macay) <= 100)
@@ -235,37 +253,39 @@ void detectAndDraw(Mat &img, CascadeClassifier &cascade, double scale)
             macay = rand() % (430 - 200) + 100;
             score++;
             system("mplayer narutosad.mp3 &");
-            //img_rdm = ChangeFruit(); // fruta aleatoria
+            img_rdm = ChangeFruit(); // fruta aleatoria
         }
     }
     //img_rdm.copyTo(img.colRange(macax, macax + img_rdm.cols).rowRange(macay, macay + img_rdm.rows));
 
-    drawTransparency(img, img_rdm, macax, macay);
-
-
-
-
+    //drawTransparency(img, img_rdm, macax, macay);
+    
+    //fruta_1.transp = imread("apple.png", IMREAD_UNCHANGED);
+    fruta_1.drawFigura(img, img_rdm, macax, macay);
 
     cv::flip(img, img_espelhada, 1);
 
     //drawText(img_espelhada, "Score: ", score, Point(450, 50));
 
-    auto end = sc.now();
-    auto time_span = static_cast<chrono::duration<double>>(end - start);
+    // auto end = sc.now();
+    // auto time_span = static_cast<chrono::duration<double>>(end - start);
 
-    if (time_span.count() >= 1)
-    {
-        //cout<<relogin<<"\n";
-        relogin++;
-        start = sc.now();
-    }
+    // if (time_span.count() >= 1)
+    // {
+    //     //cout<<relogin<<"\n";
+    //     relogin++;
+    //     start = sc.now();
+    // }
+
+    relogio.atualizaTempo();
+
 
     //drawText(img_espelhada, "Time: ",relogin, Point(20, 50));
 
 
 
 
-    texto_score.setTexto("Time: " + std::to_string(relogin));
+    texto_score.setTexto("Time: " + std::to_string(relogio.getTempoAtual()));
     texto_score.setImg(img_espelhada);
     texto_score.drawTexto(20, 50);
 
@@ -363,18 +383,51 @@ void Texto::drawTexto(int x, int y)
 
 // CLASSE FIGURA AQUI
 
-Figura::Figura(string img_name)
+
+void Figura::drawFigura(Mat frame, Mat transp, double xPos, double yPos)
 {
-    img = imread(img_name, IMREAD_UNCHANGED);
+   Mat mask;
+    vector<Mat> layers;
+
+    split(transp, layers); // seperate channels
+    Mat rgb[3] = {layers[0], layers[1], layers[2]};
+    mask = layers[3];      // png's alpha channel used as mask
+    merge(rgb, 3, transp); // put together the RGB channels, now transp insn't transparent
+    transp.copyTo(frame.rowRange(yPos, yPos + transp.rows).colRange(xPos, xPos + transp.cols), mask);
 }
 
-void Figura::drawFigura(Mat frame, double xPos, double yPos)
+
+// RELOGIO
+
+Relogio::Relogio()
 {
-    Mat mask;
-    vector<Mat> layers;
-    split(img, layers); // seperate channels
-    Mat rgb[3] = {layers[0], layers[1], layers[2]};
-    mask = layers[3];   // png's alpha channel used as mask
-    merge(rgb, 3, img); // put together the RGB channels, now transp insn't transparent
-    img.copyTo(frame.rowRange(yPos, yPos + img.rows).colRange(xPos, xPos + img.cols), mask);
+    start = sc.now();
+    end = sc.now();
+    relogin = 0;
+
+}
+
+int Relogio::getTempoAtual()
+{
+    return relogin;
+}
+
+
+void Relogio::zerarTempo()
+{
+    relogin = 0;
+    start = sc.now();
+    end = sc.now();
+}
+
+void Relogio::atualizaTempo()
+{
+    end = sc.now();
+    auto time_span = static_cast<chrono::duration<double>>(end - start);
+
+    if (time_span.count() >= 1)
+    {
+        relogin++;
+        start = sc.now();
+    }
 }
