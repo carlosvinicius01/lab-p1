@@ -9,29 +9,36 @@ int main()
 {
     SistemaGerenciaFolha sist;
 
-    Assalariado *f1 = new Assalariado();
-    f1->setNome("Joao");
-    f1->setMatricula(12345);
-    f1->setSalario(500);
+    Assalariado *a = new Assalariado();
+    Comissionado *b = new Comissionado();
+    Horista *c = new Horista();
+    a->setNome("n1");
+    a->setMatricula(12345);
+    a->setSalario(500);
+    sist.setFuncionarios(a);
 
-    Comissionado *c1 = new Comissionado();
-    c1->setNome("Jose");
-    c1->setMatricula(85624);
-    c1->setVendas(100);
-    c1->setComissao(0.1);
+    b->setNome("n2");
+    b->setMatricula(85624);
+    b->setVendas(100);
+    b->setComissao(0.1);
+    sist.setFuncionarios(b);
 
-    Horista *h1 = new Horista();
-    h1->setNome("Jeremias");
-    h1->setMatricula(54321);
-    h1->setHoras(100);
-    h1->setSalarioPorHora(10);
+    c->setNome("n3");
+    c->setMatricula(54321);
+    c->setHoras(100);
+    c->setSalarioPorHora(10);
+    sist.setFuncionarios(c);
 
-    sist.setFuncionarios(c1);
-    sist.setFuncionarios(f1);
-    sist.setFuncionarios(h1);
 
-    std::cout << sist.consultaSalarioFuncionario(c1) << std::endl;
+
+
+    std::cout << sist.consultaSalarioFuncionario(a) << std::endl;
 
     std::cout << sist.calculaTotalFolha() << std::endl;
+
+    delete a;
+    delete b;
+    delete c;
+
     return 0;
 }
